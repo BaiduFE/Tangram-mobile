@@ -13,6 +13,7 @@
 
 /**
  * 滑动效果
+ *       参考自sencha touch
  * @param {HTMLelem} elem  目标元素
  * @param {Object} options 选项 
  *        参考baidu.mobile.fx.start，忽略from to参数，新增：

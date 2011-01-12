@@ -12,7 +12,8 @@
 ///import baidu.mobile.fx.start
 
 /**
- * 立体翻转效果
+ * 立体翻转效果 
+ *       部分代码来自sencha touch
  * @param {HTMLelem} elem  目标元素
  * @param {Object} options 选项 
  *        参考baidu.mobile.fx.start，忽略from to参数，新增：
