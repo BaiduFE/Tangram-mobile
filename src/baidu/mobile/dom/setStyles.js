@@ -2,7 +2,7 @@
  * Tangram Mobile
  * Copyright 2010 Baidu Inc. All rights reserved.
  * 
- * path: baidu.mobile/setStyles.js
+ * path: baidu/mobile/setStyles.js
  * author: bang
  * version: 1.0.0
  * date: 2010/12/6
