@@ -1,38 +1,27 @@
 /*
- * Tangram
- * Copyright 2009 Baidu Inc. All rights reserved.
+ * Tangram Mobile
+ * Copyright 2011 Baidu Inc. All rights reserved.
  * 
- * path: baidu/dom/setAttrs.js
- * author: allstar
- * version: 1.1.0
- * date: 2009/11/17
+ * path: baidu/mobile/dom/setAttrs.js
+ * author: walter
+ * version: 1.0.0
+ * date: 2011/3/7
  */
 
-///import baidu.dom.g;
-///import baidu.dom.setAttr;
+///import baidu.mobile.dom;
+///import baidu.mobile.dom.setAttrs;
 
 /**
  * 批量设置目标元素的attribute值
- * @name baidu.dom.setAttrs
+ * @name baidu.mobile.dom.setAttrs
  * @function
- * @grammar baidu.dom.setAttrs(element, attributes)
+ * @grammar baidu.mobile.dom.setAttrs(element, attributes)
  * @param {HTMLElement|string} element 目标元素或目标元素的id
  * @param {Object} attributes 要设置的attribute集合
  * @shortcut setAttrs
  * @meta standard
- * @see baidu.dom.setAttr,baidu.dom.getAttr
+ * @see baidu.mobile.dom.setAttr,baidu.mobile.dom.getAttr
  *             
  * @returns {HTMLElement} 目标元素
  */
-baidu.dom.setAttrs = function (element, attributes) {
-    element = baidu.dom.g(element);
-
-    for (var key in attributes) {
-        baidu.dom.setAttr(element, key, attributes[key]);
-    }
-
-    return element;
-};
-
-// 声明快捷方法
-baidu.setAttrs = baidu.dom.setAttrs;
+baidu.mobile.setAttrs = baidu.mobile.dom.setAttrs = baidu.mobile.dom.setAttrs;

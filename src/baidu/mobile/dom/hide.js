@@ -1,33 +1,26 @@
 /*
- * Tangram
- * Copyright 2009 Baidu Inc. All rights reserved.
+ * Tangram Mobile
+ * Copyright 2011 Baidu Inc. All rights reserved.
  * 
- * path: baidu/dom/hide.js
- * author: allstar
- * version: 1.1.0
- * date: 2009/11/17
+ * path: baidu/mobile/dom/hide.js
+ * author: walter
+ * version: 1.0.0
+ * date: 2011/3/7
  */
 
-///import baidu.dom.g;
+///import baidu.mobile.dom;
+///import baidu.dom.hide;
 
 /**
  * 隐藏目标元素
- * @name baidu.dom.hide
+ * @name baidu.mobile.dom.hide
  * @function
- * @grammar baidu.dom.hide(element)
+ * @grammar baidu.mobile.dom.hide(element)
  * @param {HTMLElement|string} element 目标元素或目标元素的id
  * @shortcut hide
  * @meta standard
- * @see baidu.dom.show,baidu.dom.toggle
+ * @see baidu.mobile.dom.show,baidu.mobile.dom.toggle
  *             
  * @returns {HTMLElement} 目标元素
  */
-baidu.dom.hide = function (element) {
-    element = baidu.dom.g(element);
-    element.style.display = "none";
-
-    return element;
-};
-
-// 声明快捷方法
-baidu.hide = baidu.dom.hide;
+baidu.mobile.dom.hide = baidu.mobile.hide = baidu.dom.hide;

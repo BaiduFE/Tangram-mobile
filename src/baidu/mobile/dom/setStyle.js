@@ -1,13 +1,13 @@
 /*
  * Tangram Mobile
- * Copyright 2010 Baidu Inc. All rights reserved.
+ * Copyright 2011 Baidu Inc. All rights reserved.
  * 
- * path: baidu/event.js
- * author: bang
+ * path: baidu/mobile/dom/setStyle.js
+ * author: walter
  * version: 1.0.0
- * date: 2010/12/6
+ * date: 2011/3/7
  */
- 
+
 ///import baidu.mobile.dom;
 ///import baidu.dom.setStyle;
 

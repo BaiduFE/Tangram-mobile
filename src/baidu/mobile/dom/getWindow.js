@@ -1,31 +1,24 @@
 /*
- * Tangram
- * Copyright 2009 Baidu Inc. All rights reserved.
+ * Tangram Mobile
+ * Copyright 2011 Baidu Inc. All rights reserved.
  * 
- * path: baidu/dom/getWindow.js
- * author: allstar, erik
- * version: 1.1.0
- * date: 2009/12/02
+ * path: baidu/mobile/dom/getWindow.js
+ * author: walter
+ * version: 1.0.0
+ * date: 2011/3/7
  */
 
-///import baidu.dom.g;
-///import baidu.dom.getDocument;
+///import baidu.mobile.dom;
+///import baidu.dom.getWindow;
 
 /**
  * 获取目标元素所属的window对象
- * @name baidu.dom.getWindow
+ * @name baidu.mobile.dom.getWindow
  * @function
- * @grammar baidu.dom.getWindow(element)
+ * @grammar baidu.mobile.dom.getWindow(element)
  * @param {HTMLElement|string} element 目标元素或目标元素的id
- * @see baidu.dom.getDocument
+ * @see baidu.mobile.dom.getDocument
  *             
  * @returns {window} 目标元素所属的window对象
  */
-baidu.dom.getWindow = function (element) {
-    element = baidu.dom.g(element);
-    var doc = baidu.dom.getDocument(element);
-    
-    // 没有考虑版本低于safari2的情况
-    // @see goog/dom/dom.js#goog.dom.DomHelper.prototype.getWindow
-    return doc.parentWindow || doc.defaultView || null;
-};
+baidu.mobile.dom.getWindow = baidu.dom.getWindow;

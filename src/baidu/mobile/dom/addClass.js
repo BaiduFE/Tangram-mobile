@@ -1,49 +1,31 @@
 /*
- * Tangram
- * Copyright 2009 Baidu Inc. All right reserved.
+ * Tangram Mobile
+ * Copyright 2011 Baidu Inc. All rights reserved.
  * 
- * path: baidu/dom/addClass.js
- * author: allstar, erik
- * version: 1.1.0
- * date: 2009/12/2
+ * path: baidu/mobile/dom/addClass.js
+ * author: walter
+ * version: 1.0.0
+ * date: 2011/3/7
  */
 
-///import baidu.dom.g;
-///import baidu.string.trim;
+///import baidu.mobile.dom;
+///import baidu.dom.addClass;
 
 /**
  * 为目标元素添加className
- * @name baidu.dom.addClass
+ * @name baidu.mobile.dom.addClass
  * @function
- * @grammar baidu.dom.addClass(element, className)
+ * @grammar baidu.mobile.dom.addClass(element, className)
  * @param {HTMLElement|string} element 目标元素或目标元素的id
  * @param {string} className 要添加的className，允许同时添加多个class，中间使用空白符分隔
  * @remark
  * 使用者应保证提供的className合法性，不应包含不合法字符，className合法字符参考：http://www.w3.org/TR/CSS2/syndata.html。
  * @shortcut addClass
  * @meta standard
- * @see baidu.dom.removeClass
+ * @see baidu.mobile.dom.removeClass
  * 	
  * 	            
  * @returns {HTMLElement} 目标元素
  */
-baidu.dom.addClass = function (element, className) {
-    element = baidu.dom.g(element);
-    var classArray = className.split(/\s+/),
-        result = element.className,
-        classMatch = " " + result + " ",
-        i = 0,
-        l = classArray.length;
+baidu.mobile.addClass = baidu.mobile.dom.addClass = baidu.dom.addClass;
 
-    for (; i < l; i++){
-         if ( classMatch.indexOf( " " + classArray[i] + " " ) < 0 ) {
-             result += ' ' + classArray[i];
-         }
-    }
-
-    element.className = result;
-    return element;
-};
-
-// 声明快捷方法
-baidu.addClass = baidu.dom.addClass;

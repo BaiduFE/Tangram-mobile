@@ -1,35 +1,26 @@
 /*
- * Tangram
- * Copyright 2009 Baidu Inc. All rights reserved.
+ * Tangram Mobile
+ * Copyright 2011 Baidu Inc. All rights reserved.
  * 
- * path: baidu/dom/g.js
- * author: allstar, erik
- * version: 1.1.0
- * date: 2009/11/17
+ * path: baidu/mobile/dom/g.js
+ * author: walter
+ * version: 1.0.0
+ * date: 2011/3/7
  */
 
-///import baidu.dom;
+///import baidu.mobile.dom;
+///import baidu.dom.g;
 
 /**
  * 从文档中获取指定的DOM元素
- * @name baidu.dom.g
+ * @name baidu.mobile.dom.g
  * @function
- * @grammar baidu.dom.g(id)
+ * @grammar baidu.mobile.dom.g(id)
  * @param {string|HTMLElement} id 元素的id或DOM元素
  * @shortcut g,G
  * @meta standard
- * @see baidu.dom.q
+ * @see baidu.mobile.dom.q
  *             
  * @returns {HTMLElement|null} 获取的元素，查找不到时返回null,如果参数不合法，直接返回参数
  */
-baidu.dom.g = function (id) {
-    if ('string' == typeof id || id instanceof String) {
-        return document.getElementById(id);
-    } else if (id && id.nodeName && (id.nodeType == 1 || id.nodeType == 9)) {
-        return id;
-    }
-    return null;
-};
-
-// 声明快捷方法
-baidu.g = baidu.G = baidu.dom.g;
+baidu.mobile.g = baidu.mobile.G = baidu.mobile.dom.g = baidu.dom.g;
