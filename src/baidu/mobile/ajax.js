@@ -1,5 +1,5 @@
 /*
- * Tangram
+ * Tangram Mobile
  * Copyright 2011 Baidu Inc. All rights reserved.
  * 
  * path: baidu/mobile/ajax.js
