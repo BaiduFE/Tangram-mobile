@@ -9,7 +9,6 @@
  */
 
 ///import baidu.mobile.dom;
-///import baidu.dom.create;
 
 /**
  * 创建 Element 对象。
@@ -23,4 +22,10 @@
  *
  * @return {HTMLElement} 创建的 Element 对象
  */
-baidu.mobile.dom.create = baidu.dom.create;
+baidu.mobile.dom.create = function(tagName, opt_attributes) {
+    var el = document.createElement(tagName),
+        attributes = opt_attributes || {};
+    return baidu.mobile.dom.setAttrs(el, attributes);
+};
+
+baidu.mobile.create = baidu.mobile.dom.create;

@@ -1,15 +1,13 @@
 /*
  * Tangram Mobile
  * Copyright 2011 Baidu Inc. All rights reserved.
- * 
+ *
  * path: baidu/mobile/dom/q.js
  * author: walter
  * version: 1.0.0
  * date: 2011/3/7
  */
-
 ///import baidu.mobile.dom;
-///import baidu.dom.q;
 
 /**
  * 通过className获取元素
@@ -23,7 +21,40 @@
  * @shortcut q,Q
  * @meta standard
  * @see baidu.mobile.dom.g
- *             
+ *
  * @returns {Array} 获取的元素集合，查找不到或className参数错误时返回空数组.
  */
-baidu.mobile.q = baidu.mobile.Q = baidu.mobile.dom.q = baidu.dom.q;
+baidu.mobile.dom.q = function(className, element, tagName){
+    var result = [], elements;
+    
+    if (!(className = trim(className))) {
+        return result;
+    }
+    
+    // 初始化element参数
+    if ('undefined' == typeof element) {
+        element = document;
+    }
+    else {
+        element = baidu.mobile.dom.g(element);
+        if (!element) {
+            return result;
+        }
+    }
+    
+    // 初始化tagName参数
+    tagName && (tagName = baidu.mobile.string.trim(tagName).toUpperCase());
+    
+    elements = element.getElementsByClassName(className);
+    for (var i = 0, l = elements.length; i < l; i++) {
+        var node = elements[i];
+        if (tagName && node.tagName != tagName) {
+            continue;
+        }
+        result.push(node);
+    }
+    
+    return result;
+};
+
+baidu.mobile.q = baidu.mobile.Q = baidu.mobile.dom.q

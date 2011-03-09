@@ -1,29 +1,25 @@
 /*
- * Tangram
- * Copyright 2009 Baidu Inc. All rights reserved.
+ * Tangram Mobile
+ * Copyright 2011 Baidu Inc. All rights reserved.
  * 
- * path: baidu/dom/toggle.js
- * author: allstar
- * version: 1.1.0
- * date: 2009/11/17
+ * path: baidu/mobile/dom/toggle.js
+ * author: walter
+ * version: 1.0.0
+ * date: 2011/3/7
  */
 
-///import baidu.dom.g;
+///import baidu.mobile.dom;
+///import baidu.dom.toggle;
 
 /**
  * 改变目标元素的显示/隐藏状态
- * @name baidu.dom.toggle
+ * @name baidu.mobile.dom.toggle
  * @function
- * @grammar baidu.dom.toggle(element)
+ * @grammar baidu.mobile.dom.toggle(element)
  * @param {HTMLElement|string} element 目标元素或目标元素的id
  * @meta standard
- * @see baidu.dom.show,baidu.dom.hide
+ * @see baidu.mobile.dom.show,baidu.mobile.dom.hide
  *             
  * @returns {HTMLElement} 目标元素
  */
-baidu.dom.toggle = function (element) {
-    element = baidu.dom.g(element);
-    element.style.display = element.style.display == "none" ? "" : "none";
-
-    return element;
-};
+baidu.mobile.dom.toggle = baidu.dom.toggle;

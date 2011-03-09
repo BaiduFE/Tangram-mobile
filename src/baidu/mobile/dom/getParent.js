@@ -9,7 +9,7 @@
  */
 
 ///import baidu.mobile.dom;
-///import baidu.dom._g;
+///import baidu.mobile.dom.g;
 
 /**
  * 获得元素的父节点
@@ -20,6 +20,6 @@
  * @return {HTMLElement|null} 父元素，如果找不到父元素，返回null
  */
 baidu.mobile.dom.getParent = function (element) {
-    element = baidu.dom._g(element);
+    element = baidu.mobile.dom.g(element);
     return element.parentNode || null;
 };

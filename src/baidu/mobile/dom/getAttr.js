@@ -23,5 +23,14 @@
  *             
  * @returns {string|null} 目标元素的attribute值，获取不到时返回null
  */
-baidu.mobile.getAttr = baidu.mobile.dom.getAttr = baidu.dom.getAttr;
+baidu.mobile.dom.getAttr = function (element, key) {
+    element = baidu.mobile.dom.g(element);
 
+    if ('style' == key){
+        return element.style.cssText;
+    }
+
+    return element.getAttribute(key);
+};
+
+baidu.mobile.getAttr = baidu.mobile.dom.getAttr;

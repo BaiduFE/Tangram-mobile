@@ -29,4 +29,17 @@
  *             
  * @returns {HTMLElement} 目标元素
  */
-baidu.mobile.dom.setAttr = baidu.mobile.setAttr = baidu.dom.setAttr;
+baidu.mobile.dom.setAttr = function(element, key, value){
+    element = baidu.mobile.dom.g(element);
+    
+    if ('style' == key) {
+        element.style.cssText = value;
+    }
+    else {
+        element.setAttribute(key, value);
+    }
+    
+    return element;
+};
+
+baidu.mobile.setAttr = baidu.mobile.dom.setAttr;

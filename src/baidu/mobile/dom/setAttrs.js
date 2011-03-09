@@ -9,7 +9,6 @@
  */
 
 ///import baidu.mobile.dom;
-///import baidu.mobile.dom.setAttrs;
 
 /**
  * 批量设置目标元素的attribute值
@@ -24,4 +23,14 @@
  *             
  * @returns {HTMLElement} 目标元素
  */
-baidu.mobile.setAttrs = baidu.mobile.dom.setAttrs = baidu.mobile.dom.setAttrs;
+baidu.mobile.dom.setAttrs = function(element, attributes){
+    element = baidu.mobile.dom.g(element);
+    
+    for (var key in attributes) {
+        element.setAttribute(key, attributes[key]);
+    }
+    
+    return element;
+};
+
+baidu.mobile.setAttrs = baidu.mobile.dom.setAttrs

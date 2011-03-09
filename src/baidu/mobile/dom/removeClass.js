@@ -26,4 +26,4 @@
  *             
  * @returns {HTMLElement} 目标元素
  */
-baidu.mobile.dom.removeClass = baidu.mobile.removeClass = baidu.dom.removeClass;
+baidu.mobile.removeClass = baidu.mobile.dom.removeClass = baidu.dom.removeClass;

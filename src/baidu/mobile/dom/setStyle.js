@@ -19,4 +19,16 @@
  * @param {string}              value   要设置的样式值
  * @return {HTMLElement} 被操作的DOM元素
  */
-baidu.mobile.dom.setStyle = baidu.mobile.setStyle = baidu.dom.setStyle;
+baidu.mobile.dom.setStyle = function(element, key, value){
+    var el = baidu.mobile.dom.g(element);
+    
+    key = key.replace(/\-[a-z]/g, function(m){
+        return m[1].toUpperCase();
+    });
+    
+    el.style[key] = value;
+    
+    return el;
+}
+
+baidu.mobile.setStyle = baidu.mobile.dom.setStyle;

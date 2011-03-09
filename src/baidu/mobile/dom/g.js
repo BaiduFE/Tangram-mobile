@@ -9,7 +9,7 @@
  */
 
 ///import baidu.mobile.dom;
-///import baidu.dom.g;
+///import baidu.dom._g;
 
 /**
  * 从文档中获取指定的DOM元素
@@ -23,4 +23,4 @@
  *             
  * @returns {HTMLElement|null} 获取的元素，查找不到时返回null,如果参数不合法，直接返回参数
  */
-baidu.mobile.g = baidu.mobile.G = baidu.mobile.dom.g = baidu.dom.g;
+baidu.mobile.g = baidu.mobile.G = baidu.mobile.dom.g = baidu.dom._g;

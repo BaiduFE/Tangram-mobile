@@ -1,17 +1,23 @@
 /*
- * Tangram
- * Copyright 2009 Baidu Inc. All rights reserved.
+ * Tangram Mobile
+ * Copyright 2011 Baidu Inc. All rights reserved.
+ * 
+ * path: baidu/mobile/dom/show.js
+ * author: walter
+ * version: 1.0.0
+ * date: 2011/3/7
  */
 
-///import baidu.dom.g;
+///import baidu.mobile.dom;
+///import baidu.dom.show;
 
 /**
  * 显示目标元素，即将目标元素的display属性还原成默认值
  * 默认值可能在stylesheet中定义，或者是继承了浏览器的默认样式值
  * @author allstar, berg
- * @name baidu.dom.show
+ * @name baidu.mobile.dom.show
  * @function
- * @grammar baidu.dom.show(element)
+ * @grammar baidu.mobile.dom.show(element)
  * @param {HTMLElement|string} element 目标元素或目标元素的id
  * @remark
  * 注意1：如果在CSS中定义此元素的样式为display:none
@@ -24,16 +30,8 @@
  * 
  * @shortcut show
  * @meta standard
- * @see baidu.dom.hide,baidu.dom.toggle
+ * @see baidu.mobile.dom.hide,baidu.mobile.dom.toggle
  *             
  * @returns {HTMLElement} 目标元素
  */
-baidu.dom.show = function (element) {
-    element = baidu.dom.g(element);
-    element.style.display = "";
-
-    return element;
-};
-
-// 声明快捷方法
-baidu.show = baidu.dom.show;
+baidu.mobile.show = baidu.mobile.dom.show = baidu.dom.show;
