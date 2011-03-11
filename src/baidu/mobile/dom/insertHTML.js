@@ -9,6 +9,7 @@
  */
 
 ///import baidu.mobile.dom;
+///import baidu.dom.insertHTML;
 
 /**
  * 在目标元素的指定位置插入HTML代码
@@ -29,6 +30,4 @@
  *             
  * @returns {HTMLElement} 目标元素
  */
-
-
-baidu.mobile.insertHTML = baidu.mobile.dom.insertHTML;
+baidu.mobile.insertHTML = baidu.mobile.dom.insertHTML = baidu.dom.insertHTML;

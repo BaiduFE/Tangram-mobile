@@ -80,4 +80,5 @@ baidu.mobile.fx.start = function(elem, options) {
         elem["_tgFxTimeout"] = setTimeout(elem["_tgFxTimeoutFunc"] , options.duration + options.delay);
         
     }, options.delay);
+    return elem;
 };

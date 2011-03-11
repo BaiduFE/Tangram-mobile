@@ -9,6 +9,7 @@
  */
 
 ///import baidu.mobile.string;
+///improt baidu.string.trim;
 
 /**
  * 删除目标字符串两端的空白字符
@@ -22,8 +23,4 @@
  *             
  * @returns {string} 删除两端空白字符后的字符串
  */
-baidu.mobile.string.trim = function(text){
-    return (text || "").replace(/^\s+|\s+$/g, "");
-}
-
-baidu.mobile.trim = baidu.mobile.string.trim;
+baidu.mobile.trim = baidu.mobile.string.trim = baidu.string.trim;

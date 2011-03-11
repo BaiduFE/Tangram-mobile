@@ -47,4 +47,5 @@ baidu.mobile.fx.slide = function(elem, options) {
     }
 
     baidu.mobile.fx.translate(elem, [toX + "px", toY + "px"], [fromX + "px", fromY + "px"], options);
+    return elem;
 };

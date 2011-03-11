@@ -8,6 +8,7 @@
  * date: 2011/3/7
  */
 ///import baidu.mobile.dom;
+///import baidu.string.trim;
 
 /**
  * 通过className获取元素
@@ -26,8 +27,8 @@
  */
 baidu.mobile.dom.q = function(className, element, tagName){
     var result = [], elements;
-    
-    if (!(className = trim(className))) {
+    className = baidu.string.trim(className);
+    if (!className) {
         return result;
     }
     
@@ -57,4 +58,4 @@ baidu.mobile.dom.q = function(className, element, tagName){
     return result;
 };
 
-baidu.mobile.q = baidu.mobile.Q = baidu.mobile.dom.q
+baidu.mobile.q = baidu.mobile.Q = baidu.mobile.dom.q;

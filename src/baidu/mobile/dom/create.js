@@ -9,6 +9,7 @@
  */
 
 ///import baidu.mobile.dom;
+///import baidu.mobile.dom.setAttrs;
 
 /**
  * 创建 Element 对象。

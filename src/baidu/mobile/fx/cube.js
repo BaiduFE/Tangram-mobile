@@ -97,4 +97,5 @@ baidu.mobile.fx.cube = function(elem, options) {
     };
     
     baidu.mobile.fx.start(elem, options);
+    return elem;
 };

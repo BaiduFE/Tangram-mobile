@@ -24,7 +24,5 @@
  *             
  * @returns {boolean} 类型判断结果
  */
-baidu.mobile.lang.isString = baidu.lang.isString;
+baidu.mobile.isString = baidu.mobile.lang.isString = baidu.lang.isString;
 
-// 声明快捷方法
-baidu.mobile.isString = baidu.mobile.lang.isString;

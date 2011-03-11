@@ -9,7 +9,7 @@
  */
 
 ///import baidu.mobile.dom;
-///import  baidu.dom.hasClass;
+///import baidu.dom.hasClass;
 
 /**
  * 判断元素是否拥有指定的className

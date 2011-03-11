@@ -37,4 +37,5 @@ baidu.mobile.fx.fade = function(elem, options) {
         }
     });
     baidu.mobile.fx.start(elem, options);
+    return elem;
 };	

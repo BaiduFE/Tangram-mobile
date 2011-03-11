@@ -8,7 +8,7 @@
  * date: 2011/3/7
  */
 ///import baidu.mobile.dom;
-///import baidu.dom.getAttr;
+///import baidu.mobile.dom.g;
 
 /**
  * 获取目标元素的属性值

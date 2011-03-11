@@ -63,7 +63,7 @@ baidu.mobile.ui.floater = function(options) {
     me.parent.appendChild(me.dom);
     
     baidu.m.on(window, "turn", function(e){me.update()});
-}
+};
 
 baidu.mobile.ui.floater.prototype = {
     classPrefix : "tangram",
@@ -115,4 +115,4 @@ baidu.mobile.ui.floater.prototype = {
     getClass : function(key) {
         return this.classPrefix + "_" + this.uiType + (key ? ("_" + key) : "");
     }
-}
+};

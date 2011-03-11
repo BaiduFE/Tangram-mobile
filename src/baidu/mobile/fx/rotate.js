@@ -29,4 +29,5 @@ baidu.mobile.fx.rotate = function(elem, to, from, options) {
         to : {webkitTransform :  "rotate(" + to + "deg)" }
     });
     baidu.mobile.fx.start(elem, options);
+    return elem;
 };

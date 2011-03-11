@@ -41,4 +41,5 @@ baidu.mobile.fx.scale = function(elem, to, from, options) {
         to : {webkitTransform :  getScale(to[0], to[1], to[2]) }
     });
     baidu.mobile.fx.start(elem, options);
+    return elem;
 };

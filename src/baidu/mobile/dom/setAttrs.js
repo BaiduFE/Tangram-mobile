@@ -9,6 +9,7 @@
  */
 
 ///import baidu.mobile.dom;
+///import baidu.mobile.dom.g;
 
 /**
  * 批量设置目标元素的attribute值
@@ -33,4 +34,4 @@ baidu.mobile.dom.setAttrs = function(element, attributes){
     return element;
 };
 
-baidu.mobile.setAttrs = baidu.mobile.dom.setAttrs
+baidu.mobile.setAttrs = baidu.mobile.dom.setAttrs;

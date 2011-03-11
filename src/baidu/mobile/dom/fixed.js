@@ -60,4 +60,4 @@ baidu.mobile.dom.fixed = function(elem, options) {
             baidu.m.setStyle(elem,"display", "none");
         }
     }, true);
-}
+};

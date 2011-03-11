@@ -37,4 +37,5 @@ baidu.mobile.fx.translate = function(elem, to, from, options) {
         to : {webkitTransform : getTranslate(to[0], to[1])}
     });
     baidu.mobile.fx.start(elem, options);
+    return elem;
 };

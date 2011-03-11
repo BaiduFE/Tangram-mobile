@@ -8,7 +8,7 @@
  * date: 2011/1/7
  */
 
-///import baidu.mobile.ui.float;
+///import baidu.mobile.ui.floater;
 ///import baidu.string.format;
 ///import baidu.mobile.event._customEvent.tap;
 

@@ -9,7 +9,7 @@
  */
 
 ///import baidu.mobile.dom;
-///import baidu.dom.setAttr;
+///import baidu.mobile.dom.g;
 
 /**
  * 设置目标元素的attribute值

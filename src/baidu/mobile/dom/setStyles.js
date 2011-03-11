@@ -9,7 +9,7 @@
  */
 
 ///import baidu.mobile.dom;
-///import baidu.dom.setStyles;
+///import baidu.mobile.dom.setStyle;
 
 /**
  * 批量设置DOM元素的样式值
@@ -18,4 +18,12 @@
  * @param {Object}             styles  要设置的样式集合
  * @return {HTMLElement}    elem  被操作的DOM元素
  */
-baidu.mobile.dom.setStyles = baidu.mobile.setStyles = baidu.dom.setStyles;
+baidu.mobile.dom.setStyles = baidu.mobile.setStyles = function (element, styles) {
+    element = baidu.mobile.dom.g(element);
+
+    for (var key in styles) {
+        baidu.mobile.dom.setStyle(element, key, styles[key]);
+    }
+
+    return element;
+};

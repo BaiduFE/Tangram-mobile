@@ -9,7 +9,7 @@
  */
 
 ///import baidu.mobile.dom;
-///import baidu.dom.setStyle;
+///import baidu.mobile.dom.g;
 
 /**
  * 设置DOM元素的样式值

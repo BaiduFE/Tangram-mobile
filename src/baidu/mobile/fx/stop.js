@@ -60,4 +60,5 @@ baidu.mobile.fx.stop = function(elem, gotoEnd) {
         elem["_tgFxTimeoutFunc"] = null;
         elem["_tgFxTrsProp"]  = null;
     }
+    return elem;
 };

@@ -49,4 +49,5 @@ baidu.mobile.fx.pop = function(elem, options) {
     };
     
     baidu.mobile.fx.start(elem, options);
+    return elem;
 };
