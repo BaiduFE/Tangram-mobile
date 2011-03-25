@@ -1,0 +1,20 @@
+/*
+ * Tangram Mobile
+ * Copyright 2010 Baidu Inc. All rights reserved.
+ * 
+ * path: baidu/browser/android.js
+ * author: bang
+ * version: 1.0.0
+ * date: 2010/12/6
+ */
+
+///import baidu.browser;
+
+if (/android\s*(\d+[\.\d]*)/i.test(navigator.userAgent)) {
+/**
+ * 判断是否为Android系统
+ * @grammar baidu.browser.android
+ * @property android android版本号
+ */
+    baidu.browser.android = parseFloat(RegExp['\x241']);
+}
