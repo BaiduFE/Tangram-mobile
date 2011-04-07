@@ -43,7 +43,7 @@ baidu.ui.Scroller.createBar = function(scroller) {
 					
 				if (!scroller[lock]) {
 					scroller[bar] = scroller[bar] 
-						|| new baidu.ui.scroller.Bar(isHori ? 'hori' : 'vert', scroller.wrapper, options.fade, options.shrink, options.color);
+						|| new baidu.ui.Scroller.Bar(isHori ? 'hori' : 'vert', scroller.wrapper, options.fade, options.shrink, options.color);
 					scroller[bar].init(scroller[wrapper], scroller[elem]);
 				} else if (scroller[bar]) {
 					scroller[bar] = scroller[bar].remove();

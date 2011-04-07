@@ -54,7 +54,7 @@ baidu.ui.Scroller._getMomentum = function(scroller, deltaTime) {
 			
 		return scroller[lockType] ? 
 			{ dist: 0, duration: 0 } : 
-			baidu.uiScroller._calcMomentum(scroller[direct] - scroller[startType],
+			baidu.ui.Scroller._calcMomentum(scroller[direct] - scroller[startType],
 							deltaTime,
 							-scroller[direct] + scroller[wrapperType]/5,
 							scroller[direct] + scroller[elemType] - scroller[wrapperType] + scroller[wrapperType]/5);
@@ -80,7 +80,7 @@ baidu.ui.Scroller._getMomentum = function(scroller, deltaTime) {
  *         参考自iScroll http://cubiq.org/iscroll
  * @private
  */
-baidu.uiScroller._calcMomentum = function (dist, time, maxDistUpper, maxDistLower) {
+baidu.ui.Scroller._calcMomentum = function (dist, time, maxDistUpper, maxDistLower) {
 	//摩擦力越小滚动约远
 	//经过测试android机器，把摩擦力减少到1.5比较合适
     var friction = 1.5,

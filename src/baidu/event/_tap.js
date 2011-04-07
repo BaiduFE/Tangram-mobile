@@ -9,7 +9,8 @@
  */
 
 ///import baidu.event;
-///import baidu.event.on
+///import baidu.event.on;
+///import baidu.browser.isSupportTouch;
 
 baidu.event.CANCLE_TAP = "_tgEvtCancleTap";
 baidu.event.TAP_LAST_TIME = "_tgEvtTapLastTime";
@@ -28,23 +29,29 @@ baidu.event._tap = function (elem, listener, type, dbtapThreshold) {
         isCancel,
         CANCLE_TAP = baidu.event.CANCLE_TAP,
         TAP_LAST_TIME = baidu.event.TAP_LAST_TIME,
+        isSupportTouch = baidu.browser.isSupportTouch,
         
         handlers = {
             touchstart : function (e) {
                 var touch = e.targetTouches ? e.targetTouches[0] : e;
                 isCancel = false;
                 startTime = e.timeStamp;
+                listener.touchstart && listener.touchstart.call(elem, e);
             },
             
             touchmove : function (e) {
-                isCancel = true;
+                if(isSupportTouch){
+                    isCancel = true;
+                    listener.touchmove && listener.touchmove.call(elem, e);
+                }
             },
             
             touchend : function (e) {
                 if (!isCancel) {
+                    var fn = listener.touchend || listener;
                     if (type == "dbtap") {
                         if (elem[TAP_LAST_TIME] && e.timeStamp - elem[TAP_LAST_TIME] <= dbtapThreshold) {
-                            listener.call(elem, e);
+                            fn.call(elem, e);
                             e.preventDefault();
                             elem[CANCLE_TAP] = true;
                             elem[TAP_LAST_TIME] = 0;
@@ -57,7 +64,7 @@ baidu.event._tap = function (elem, listener, type, dbtapThreshold) {
                             if (elem[CANCLE_TAP] === true) {
                                 elem[CANCLE_TAP] = false;
                             } else {
-                                listener.call(elem, e);
+                                fn.call(elem, e);
                             }
                         }, 0);
                     }

@@ -23,10 +23,11 @@ baidu.page.hideBar = function (fn) {
                 if(fn){
                     setTimeout(function(){
                         fn();
-                    }, 0)
+                    }, 100)
                 }
             }, 0);
-        }
+        };
+        
     if (document.readyState == "complete") {
         hideFunc();
     } else {
