@@ -11,6 +11,7 @@
 ///import baidu.fx;
 ///import baidu.dom.g;
 ///import baidu.object.each;
+///import baidu.event.once;
 
 /**
  * 基础动画方法
@@ -68,17 +69,15 @@ baidu.fx.start = function(elem, options) {
         baidu.object.each(options.to, function(value, property) {
             elem["_tgFxTrsProp"].push(property);
         });
+ 
+        elem["_tgFxTimeoutFunc"] = options.onfinish;
         
-        //用setTimeout模拟动画结束。存储在elem上为了在stop时用到。
-        //不用webkitTransitionEnd事件的原因：两种动画叠加时无法分别处理两个动画的onfinish
-        elem["_tgFxTimeoutFunc"] = function () {
-            options.onfinish.call(elem, elem);
+        baidu.event.once(elem, 'webkitTransitionEnd', function(){
+            options.onfinish && options.onfinish.call(elem);
             style['webkitTransitionProperty'] = null;
-            elem["_tgFxTimeout"] = null;
-            elem["_tgFxTimeoutFunc"] = null;
             elem["_tgFxTrsProp"]  = null;
-        }
-        elem["_tgFxTimeout"] = setTimeout(elem["_tgFxTimeoutFunc"] , options.duration + options.delay);
+            elem["_tgFxTimeoutFunc"] = null;
+        });
         
     }, options.delay);
     return elem;
