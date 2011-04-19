@@ -8,7 +8,7 @@
  * date: 2010/12/6
  */
 
-///import baidu.browser.has3d;
+///import baidu.fx.getTranslate;
 ///import baidu.fx.start;
 ///import baidu.object.extend;
 
@@ -22,13 +22,8 @@
  * @param {Object} options 选项 参照baidu.fx.start
  */
 baidu.fx.translate = function(elem, to, from, options) {
-    var 
-        translateOpen = 'translate' + (baidu.browser.has3d ? '3d(' : '('),
-        translateClose = baidu.browser.has3d ? ',0)' : ')',
-        getTranslate = function(x, y) {
-            return translateOpen + x + "," + y + translateClose;
-        }
-        
+    var getTranslate = baidu.fx.getTranslate;
+    
     options = baidu.object.extend(options || {}, {
         from : 
             from ? 
