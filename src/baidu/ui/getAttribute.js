@@ -20,7 +20,7 @@
  */
 
 baidu.ui.getAttribute = function(element){
-    var attributeName = "data-tangram",
+    var attributeName = "t-attr",
         attrs = element.getAttribute(attributeName),
         params = {},
         len,
