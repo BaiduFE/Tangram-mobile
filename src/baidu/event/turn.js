@@ -10,6 +10,8 @@
 
 ///import baidu.event;
 ///import baidu.event.on
+///import baidu.ui;
+
 /**
  * 旋转屏幕事件
  * 对事件对象e扩展一个属性：
