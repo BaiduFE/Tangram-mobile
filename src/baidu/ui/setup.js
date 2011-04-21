@@ -10,27 +10,18 @@
 */
 
 ///import baidu.dom.query;
-///import baidu.dom.ready;
-///import baidu.ui.hideBarFn;
-///import baidu.lang.isFunction;
 ///import baidu.page.hideBar;
 
 /**
  * 从当前页面批量setup所有控件（DOM - 控件）
  *
- * @param {object} options 配置
- * @param {HTMLElement} [options.element = document] setup容器元素
- * @param {Function} [options.onsuccess] setup成功回调函数
- * @param {Boolean} [options.hidebar = true] 是否隐藏地址栏
+ * @param {Function} [fn] setup成功回调函数
+ * @param {object} [options] 配置
+ * @param {HTMLElement} element setup容器元素
  */
-baidu.ui.setup = function(options) {
-    baidu.object.extend({
-        element: document,
-        hidebar: true
-    }, options);
-    
+baidu.ui.setup = function(fn, element) {
     function createAll() {
-        var elements = baidu.dom.query('[t-ui]', options.element),
+        var elements = baidu.dom.query('[t-ui]', element),
         length = elements.length,
         i,
         type,
@@ -58,16 +49,10 @@ baidu.ui.setup = function(options) {
         }
         
         //执行成功回调函数
-        if(options.onsuccess) {
-            options.onsuccess();
+        if(fn) {
+            fn();
         }
     }
     
-    baidu.dom.ready( function() {
-        if(options.hidebar) {
-            baidu.page.hideBar(createAll);
-        } else {
-            createAll();
-        }
-    });
+    baidu.page.hideBar(createAll);
 };

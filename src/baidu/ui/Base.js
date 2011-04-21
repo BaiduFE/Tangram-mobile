@@ -12,7 +12,6 @@
 ///import baidu.ui.getAttribute;
 ///import baidu.ui.getParent;
 ///import baidu.ui.getAttributesByRole;
-///import baidu.event.on;
 ///import baidu.dom.g;
 
 baidu.ui.Base = {
@@ -20,7 +19,7 @@ baidu.ui.Base = {
     /**
      * 渲染UI
      */
-    render: function(){
+    setup: function(){
         var me = this;
         me._setup();
         me._init();
@@ -38,7 +37,6 @@ baidu.ui.Base = {
         baidu.object.extend(me, baidu.ui.getAttribute(element));
         
         element.setAttribute('data-guid', me.guid); 
-        me.setup && me.setup();
         
         me.dispatchEvent("onsetup");
     },
@@ -48,38 +46,7 @@ baidu.ui.Base = {
      */
     _init: function(){
         var me = this;
-        me.init && me.init();  
         me.dispatchEvent("onload");
-    },
-    
-    /**
-     * 获取target最近的一个父亲role节点
-     */
-    getRoleElement: function(target){
-        while(target) {
-            if(target == document.body || target == this.element) {
-                return null;
-            }
-
-            if(target.getAttribute('t-role')) {
-                return target;
-            }
-
-            target = target.parentNode;
-        }
-    },
-    
-    /**
-     * 获取target最近的一个父亲role类型
-     */
-    getRoleType: function(target){
-        var role = this.getRoleElement(target);
-        
-        if(role){
-            return role.getAttribute('t-role');
-        }
-        
-        return null;
     },
     
     /**
