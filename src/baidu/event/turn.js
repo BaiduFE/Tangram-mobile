@@ -9,8 +9,8 @@
 */
 
 ///import baidu.event;
-///import baidu.event.on
-///import baidu.ui;
+
+baidu.event.turnHideBar = true;
 
 /**
  * 旋转屏幕事件
@@ -27,8 +27,8 @@ baidu.event.turn = function (elem, listener) {
     }
 
     function fn(e) {
-        var hideBarFn = baidu.ui.hideBarFn;
-        if(hideBarFn && hideBarFn()) {
+        var turnHideBar = baidu.event.turnHideBar;
+        if(turnHideBar) {
             baidu.page.hideBar(listener, elem, e);
         } else {
             listener.call(elem, e);
@@ -58,7 +58,6 @@ baidu.event.turn = function (elem, listener) {
         }
     } :
     {
-        //todo: 找android2.1以下的机器测试
         resize : function(e) {
             if(window.innerWidth > window.innerHeight) {
                 e.turned = true;
