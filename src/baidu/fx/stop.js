@@ -14,6 +14,8 @@
 ///import baidu.object.each;
 ///import baidu.dom.getStyle;
 ///import baidu.dom.getComputedStyle;
+///import baidu.dom.setStyles;
+///import baidu.dom._styleFilter.px;
 
  /**
  * 动画停止方法
@@ -22,28 +24,25 @@
  */
 baidu.fx.stop = function(elem, gotoEnd) {
      var 
-        elem = baidu.dom.g(elem),
-        props = elem["_tgFxTrsProp"],
-        styles = {};
+        d = baidu.dom,
+        elem = d.g(elem),
+        styles = elem["_tgFxTrsProp"];
         
-    if (!props) {
+    if (!styles) {
         return;
     }
     
-    for (var i = 0; i < props.length; i++) {
-        var prop = baidu.string.trim(props[i]);
+    for(var p in styles){
         //computed style是动画运行过程中的值
         //普通style是动画运动最终值，以此获得在当前状态停止的值或跳至最后状态停止
         styles[prop] = gotoEnd ? baidu.getStyle(elem, prop)
-                               : baidu.dom.getComputedStyle(elem, prop);
+        styles[p] = gotoEnd ? d.getStyle(elem, p) : d.getComputedStyle(elem, p);
     }
     
     elem.style['webkitTransitionDuration'] = null;
     elem.style["webkitTransitionProperty"] = null;
     
-    baidu.object.each(styles, function(value, property) {
-        elem.style[property] = value;
-    });
+    baidu.dom.setStyles(elem, styles);
 
     if (gotoEnd) {
         elem["_tgFxTimeoutFunc"] && elem["_tgFxTimeoutFunc"].call(elem);

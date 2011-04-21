@@ -10,7 +10,8 @@
 
 ///import baidu.fx;
 ///import baidu.dom.g;
-///import baidu.object.each;
+///import baidu.dom.setStyles;
+///import baidu.dom._styleFilter.px;
 ///import baidu.event.once;
 
 /**
@@ -47,9 +48,7 @@ baidu.fx.start = function(elem, options) {
         elem.parentNode.style['webkitTransformStyle'] = 'preserve-3d';
     }
     
-    baidu.object.each(options.from, function(value, property) {
-        style[property] = value;
-    });
+    baidu.dom.setStyles(elem, options.from);
     
     //setTimeout保证初始from style设置完成后再设置to style
     setTimeout(function() {
@@ -60,15 +59,10 @@ baidu.fx.start = function(elem, options) {
         options.onstart.call(elem, elem);
         
         //应用to style，开始动画
-        baidu.object.each(options.to, function(value, property) {
-            style[property] = value;
-        });
+        baidu.dom.setStyles(elem, options.to);
         
         //存储变化的属性，给stop用
-        elem["_tgFxTrsProp"] = elem["_tgFxTrsProp"] || [];
-        baidu.object.each(options.to, function(value, property) {
-            elem["_tgFxTrsProp"].push(property);
-        });
+        elem["_tgFxTrsProp"] = elem["_tgFxTrsProp"] || options.to;
  
         elem["_tgFxTimeoutFunc"] = options.onfinish;
         
