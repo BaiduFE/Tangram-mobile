@@ -9,7 +9,6 @@
  */
 
 ///import baidu.event;
-///import baidu.event.on;
 ///import baidu.browser.isSupportTouch;
 
 baidu.event.CANCLE_TAP = "_tgEvtCancleTap";
@@ -36,19 +35,16 @@ baidu.event._tap = function (elem, listener, type, dbtapThreshold) {
                 var touch = e.targetTouches ? e.targetTouches[0] : e;
                 isCancel = false;
                 startTime = e.timeStamp;
-                listener.touchstart && listener.touchstart.call(elem, e);
             },
             
             touchmove : function (e) {
                 if(isSupportTouch){
                     isCancel = true;
-                    listener.touchmove && listener.touchmove.call(elem, e);
                 }
             },
             
             touchend : function (e) {
                 if (!isCancel) {
-                    var fn = listener.touchend || listener;
                     if (type == "dbtap") {
                         if (elem[TAP_LAST_TIME] && e.timeStamp - elem[TAP_LAST_TIME] <= dbtapThreshold) {
                             fn.call(elem, e);
@@ -64,7 +60,7 @@ baidu.event._tap = function (elem, listener, type, dbtapThreshold) {
                             if (elem[CANCLE_TAP] === true) {
                                 elem[CANCLE_TAP] = false;
                             } else {
-                                fn.call(elem, e);
+                                listener.call(elem, e);
                             }
                         }, 0);
                     }
