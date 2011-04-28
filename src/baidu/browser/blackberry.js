@@ -2,10 +2,6 @@
  * Tangram Mobile
  * Copyright 2011 Baidu Inc. All rights reserved.
  * 
- * path: baidu/browser/blackberry.js
- * author: walter
- * version: 1.0.0
- * date: 2011/3/24
  */
 
 ///import baidu.browser;

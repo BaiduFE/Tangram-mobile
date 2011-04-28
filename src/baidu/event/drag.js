@@ -2,10 +2,6 @@
  * Tangram Mobile
  * Copyright 2011 Baidu Inc. All rights reserved.
  *
- * path: baidu/event/drag.js
- * author: walter
- * version: 1.0.0
- * date: 2011/4/19
  */
 
 ///import baidu.event;
