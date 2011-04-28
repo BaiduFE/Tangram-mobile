@@ -2,10 +2,6 @@
 * Tangram Mobile
 * Copyright 2011 Baidu Inc. All rights reserved.
 *
-* path: baidu/ui/getOrientation.js
-* author: walter
-* version: 1.0.0
-* date: 2011/4/2
 */
 
 /**

@@ -2,10 +2,6 @@
  * Tangram Mobile
  * Copyright 2011 Baidu Inc. All right reserved.
  *
- * path: baidu/wrap.js
- * author: berg,walter
- * version: 1.0.0
- * date: 2011-03-10
  */
 ///import baidu.fn.methodize;
 ///import baidu.fn.multize;
