@@ -13,6 +13,9 @@
 ///import baidu.string.trim;
 ///import baidu.object.each;
 ///import baidu.dom.getStyle;
+///import baidu.dom.getComputedStyle;
+///import baidu.dom.setStyles;
+///import baidu.dom._styleFilter.px;
 
  /**
  * 动画停止方法
@@ -21,44 +24,32 @@
  */
 baidu.fx.stop = function(elem, gotoEnd) {
      var 
-        elem = baidu.dom.g(elem),
-        props = elem["_tgFxTrsProp"],
-        styles = {};
+        d = baidu.dom,
+        elem = d.g(elem),
+        styles = elem["_tgFxTrsProp"];
         
-    if (!props) {
+    if (!styles) {
         return;
     }
-    for (var i = 0; i < props.length; i++) {
-        var prop = baidu.string.trim(props[i]);
+    
+    for(var p in styles){
         //computed style是动画运行过程中的值
         //普通style是动画运动最终值，以此获得在当前状态停止的值或跳至最后状态停止
-        styles[prop] = baidu.getStyle(elem, prop, !gotoEnd);
+        styles[prop] = gotoEnd ? baidu.getStyle(elem, prop)
+        styles[p] = gotoEnd ? d.getStyle(elem, p) : d.getComputedStyle(elem, p);
     }
     
-    //fix for iOS opacity
-    //在iOS3.1下 opacity属性停止运动时出现的问题：
-    //   1.跳到结束状态：必须加elem.style['webkitTransitionDuration'] = null才能跳到结束状态，并且此时opacity无法跳到最后状态，动画依旧进行，未找到解决方法
-    //   2.在当前状态停止：如果加上elem.style['webkitTransitionDuration'] = null，opacity的动画不会停止，其他动画停止。
-    if (gotoEnd) {
-        elem.style['webkitTransitionDuration'] = null;
-    }
+    elem.style['webkitTransitionDuration'] = null;
     elem.style["webkitTransitionProperty"] = null;
     
-    if (baidu.fx._clearQueue) {
-        baidu.fx._clearQueue(elem);
+    baidu.dom.setStyles(elem, styles);
+
+    if (gotoEnd) {
+        elem["_tgFxTimeoutFunc"] && elem["_tgFxTimeoutFunc"].call(elem);
     }
     
-    baidu.object.each(styles, function(value, property) {
-        elem.style[property] = value;
-    });
-
-    clearTimeout(elem["_tgFxTimeout"]);
-    if (gotoEnd) {
-        elem["_tgFxTimeoutFunc"] && elem["_tgFxTimeoutFunc"]();
-    } else {
-        elem["_tgFxTimeout"] = null;
-        elem["_tgFxTimeoutFunc"] = null;
-        elem["_tgFxTrsProp"]  = null;
-    }
+    elem["_tgFxTrsProp"]  = null;
+    elem["_tgFxTimeoutFunc"] = null;
+    
     return elem;
 };

@@ -8,11 +8,8 @@
  * date: 2010/12/02
  */
 
-///import baidu.ui;
 ///import baidu.ui.Base;
-///import baidu.lang.Class;
 ///import baidu.lang.Event;
-///import baidu.ui.create;
 ///import baidu.object.extend;
 
 /**

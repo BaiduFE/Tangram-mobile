@@ -10,7 +10,9 @@
 
 ///import baidu.fx;
 ///import baidu.dom.g;
-///import baidu.object.each;
+///import baidu.dom.setStyles;
+///import baidu.dom._styleFilter.px;
+///import baidu.event.once;
 
 /**
  * 基础动画方法
@@ -46,9 +48,7 @@ baidu.fx.start = function(elem, options) {
         elem.parentNode.style['webkitTransformStyle'] = 'preserve-3d';
     }
     
-    baidu.object.each(options.from, function(value, property) {
-        style[property] = value;
-    });
+    baidu.dom.setStyles(elem, options.from);
     
     //setTimeout保证初始from style设置完成后再设置to style
     setTimeout(function() {
@@ -59,26 +59,19 @@ baidu.fx.start = function(elem, options) {
         options.onstart.call(elem, elem);
         
         //应用to style，开始动画
-        baidu.object.each(options.to, function(value, property) {
-            style[property] = value;
-        });
+        baidu.dom.setStyles(elem, options.to);
         
         //存储变化的属性，给stop用
-        elem["_tgFxTrsProp"] = elem["_tgFxTrsProp"] || [];
-        baidu.object.each(options.to, function(value, property) {
-            elem["_tgFxTrsProp"].push(property);
-        });
+        elem["_tgFxTrsProp"] = elem["_tgFxTrsProp"] || options.to;
+ 
+        elem["_tgFxTimeoutFunc"] = options.onfinish;
         
-        //用setTimeout模拟动画结束。存储在elem上为了在stop时用到。
-        //不用webkitTransitionEnd事件的原因：两种动画叠加时无法分别处理两个动画的onfinish
-        elem["_tgFxTimeoutFunc"] = function () {
-            options.onfinish.call(elem, elem);
+        baidu.event.once(elem, 'webkitTransitionEnd', function(){
+            options.onfinish && options.onfinish.call(elem);
             style['webkitTransitionProperty'] = null;
-            elem["_tgFxTimeout"] = null;
-            elem["_tgFxTimeoutFunc"] = null;
             elem["_tgFxTrsProp"]  = null;
-        }
-        elem["_tgFxTimeout"] = setTimeout(elem["_tgFxTimeoutFunc"] , options.duration + options.delay);
+            elem["_tgFxTimeoutFunc"] = null;
+        });
         
     }, options.delay);
     return elem;

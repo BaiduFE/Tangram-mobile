@@ -2,7 +2,7 @@
  * Tangram Mobile
  * Copyright 2010 Baidu Inc. All rights reserved.
  * 
- * path: baidu/ui/Scroller.js
+ * path: baidu/ui/Scroller/Scroller.js
  * author: bang
  * version: 1.0.0
  * date: 2010/12/6
@@ -16,11 +16,12 @@
 ///import baidu.browser.getTranslate;
 ///import baidu.browser.isSupportTouch;
 
-///import baidu.ui..create;
+///import baidu.ui;
+///import baidu.ui.Scroller.create;
 
 
 /**
- * 类
+ * Scroller类
  *         参考自iScroll http://cubiq.org/iscroll
  * @param {String|HTMLElment} 目标元素
  * @param {Object} options 选项
@@ -32,9 +33,9 @@
             shrinkScrollbar : true,   //到边界时是否收缩滚动条
             scrollbarColor : "rgba(0,0,0,0.5)"   //滚动条颜色
         }
- * @return baidu.ui.实例
+ * @return baidu.ui.Scroller实例
  */        
-baidu.ui. = function(elem, options) {
+baidu.ui.Scroller = function(elem, options) {
     var me = this;
     
     elem = baidu.dom.g(elem);
@@ -67,7 +68,7 @@ baidu.ui. = function(elem, options) {
     return me;
 };
 
-baidu.ui..prototype = {
+baidu.ui.Scroller.prototype = {
     x : 0,
     y : 0,
     

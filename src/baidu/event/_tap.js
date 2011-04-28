@@ -9,7 +9,7 @@
  */
 
 ///import baidu.event;
-///import baidu.event.on
+///import baidu.browser.isSupportTouch;
 
 baidu.event.CANCLE_TAP = "_tgEvtCancleTap";
 baidu.event.TAP_LAST_TIME = "_tgEvtTapLastTime";
@@ -28,6 +28,7 @@ baidu.event._tap = function (elem, listener, type, dbtapThreshold) {
         isCancel,
         CANCLE_TAP = baidu.event.CANCLE_TAP,
         TAP_LAST_TIME = baidu.event.TAP_LAST_TIME,
+        isSupportTouch = baidu.browser.isSupportTouch,
         
         handlers = {
             touchstart : function (e) {
@@ -37,14 +38,16 @@ baidu.event._tap = function (elem, listener, type, dbtapThreshold) {
             },
             
             touchmove : function (e) {
-                isCancel = true;
+                if(isSupportTouch){
+                    isCancel = true;
+                }
             },
             
             touchend : function (e) {
                 if (!isCancel) {
                     if (type == "dbtap") {
                         if (elem[TAP_LAST_TIME] && e.timeStamp - elem[TAP_LAST_TIME] <= dbtapThreshold) {
-                            listener.call(elem, e);
+                            fn.call(elem, e);
                             e.preventDefault();
                             elem[CANCLE_TAP] = true;
                             elem[TAP_LAST_TIME] = 0;
