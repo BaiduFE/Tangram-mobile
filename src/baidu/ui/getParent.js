@@ -1,15 +1,15 @@
-/*
-* Tangram Mobile
-* Copyright 2011 Baidu Inc. All rights reserved.
-*
-* path: baidu/ui/getParent.js
-* author: walter
-* version: 1.0.0
-* date: 2011/4/11
-*/
+/**
+ * Tangram
+ * Copyright 2011 Baidu Inc. All rights reserved.
+ */
+ 
 ///import baidu.ui;
 ///import baidu.lang.instance;
 
+/**
+ * 获取父亲UI的实例
+ * @param {HTMLElement} 目标元素
+ */
 baidu.ui.getParent = function(element) {
     while(element) {
         element = element.parentNode;
@@ -19,7 +19,7 @@ baidu.ui.getParent = function(element) {
         }
         
         if(element.getAttribute('t-ui')) {
-            return baidu.lang.instance(element.getAttribute('data-guid'));
+            return baidu.lang.instance(element.getAttribute('t-guid'));
         }
     }
-}
+};

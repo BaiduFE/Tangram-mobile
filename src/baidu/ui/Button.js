@@ -1,31 +1,22 @@
-/*
- * Tangram Mobile
+/**
+ * Tangram
  * Copyright 2011 Baidu Inc. All rights reserved.
- *
- * path: baidu/ui/Button.js
- * author: walter
- * version: 1.0.0
- * date: 2011/3/26
  */
+ 
 ///import baidu.ui.createUI;
 ///import baidu.event.on;
 ///import baidu.event.tap;
 ///import baidu.fn.bind;
-///import baidu.dom.addClass;
-///import baidu.dom.setAttr;
-///import baidu.dom.removeClass;
 
 /**
- * button基类，创建一个button实例
+ * 按钮
  * @class button类
- * @param {Object} [options] 选项
- * @config {DOMElement}         element     
- * @config {Boolean}            disabled    按钮是否有效，默认为false（有效）。
- * @config {Function}           ontap       触摸单击时触发
- * @config {Function}           onload      页面加载时触发
- * @config {Function}           onturn      旋转屏幕时触发
- * @config {Function}           ondisable   当调用button的实例方法disable，使得按钮失效时触发。
- * @config {Function}           onenable    当调用button的实例方法enable，使得按钮有效时触发。
+ * @param {Object}              options       选项
+ * @config {DOMElement}         element       页面目标元素
+ * @config {Function}           [ontap]       触摸单击时触发
+ * @config {Function}           [onload]      按钮加载时触发
+ * @config {Function}           [ondisable]   当调用button的实例方法disable，使得按钮失效时触发。
+ * @config {Function}           [onenable]    当调用button的实例方法enable，使得按钮有效时触发。
  * @returns {Button}                        Button类
  */
 baidu.ui.Button = baidu.ui.createUI( function() {
@@ -34,74 +25,62 @@ baidu.ui.Button = baidu.ui.createUI( function() {
     uiType: 'button',
     
     /**
-     * 渲染页面元素
+     * 数据初始化
+     * @private 
+     */
+    _setup: function(){
+      var me = this;
+      baidu.ui.Base._setup.call(me);
+      me.disabled = me.element.getAttribute('disabled');
+      me.dispatchEvent('setup');  
+    },
+    
+    /**
+     * 初始化按钮
      * @private
      */
-    _render: function() {
-        var me = this,
-            element = me.element,
-            listener = {
-                touchstart: baidu.fn.bind('_onTouchStart', me),
-                touchmove: baidu.fn.bind('_onTouchMove', me),
-                touchend: baidu.fn.bind('_onTouchEnd', me)
-            };
+    _init: function() {
+        var me = this;
         
-        baidu.event.on(element, 'tap', listener, true);
+        me.on(me.element, 'tap', '_onTap');
         me.dispatchEvent("onload");
     },
     
     /**
-     * 触发touchStart事件
+     * 触发tap事件
+     * @param {object} e event对象
      * @private
      */
-    _onTouchStart: function(e){
+    _onTap: function(e){
         var me = this;
         if(me.disabled){
-            e.preventDefault();
             return;
         }
-        baidu.dom.addClass(me.element, me.getClass('taped'));
-        me.dispatchEvent("tapstart");    
+        
+        me.fire("tap", e);
     },
-    
-    /**
-     * 触发touchMove事件
-     * @private
-     */
-    _onTouchMove: function(e){
-        var me = this;
-        baidu.dom.removeClass(me.element, me.getClass('taped'));
-    },
-    
-    /**
-     * 触发touchEnd事件
-     * @private
-     */
-    _onTouchEnd: function(e){
-        var me = this;
-        baidu.dom.removeClass(me.element, me.getClass('taped'));   
-        me.dispatchEvent("tap");  
-    },
-    
+
     /**
      * 删除disabled属性
      */
-    enable: function(){
+    enable: function() {
         var me = this,
             element = me.element;
-        baidu.dom.setAttr(element, 'disabled', false);
-        baidu.dom.removeClass(element, me.getClass('disable'));
+        
+        element.removeAttribute('disabled');
+        me.disabled = false;
         me.dispatchEvent('enable');
     },
     
     /**
      * 设置disabled属性
      */
-    disable: function(){
+    disable: function() {
         var me = this,
-            element = me.element;
-        baidu.dom.setAttr(element,'disabled', 'disabled');
-        baidu.dom.addClass(element, me.getClass('disable'));
+        element = me.element;
+        
+        element.setAttrbute('disabled', 'disabled');
+        me.disabled = 'disabled';
         me.dispatchEvent('disable');
     }
 });

@@ -1,11 +1,6 @@
-/*
- * Tangram UI
- * Copyright 2009 Baidu Inc. All rights reserved.
- * 
- * path: baidu/ui/getAttribute.js
- * author: berg
- * version: 1.0.0
- * date: 2010/07/27 00:38:11
+/**
+ * Tangram
+ * Copyright 2011 Baidu Inc. All rights reserved.
  */
 
 ///import baidu.ui;

@@ -1,14 +1,9 @@
-/*
-* Tangram Mobile
-* Copyright 2011 Baidu Inc. All rights reserved.
-*
-* path: baidu/ui/Video.js
-* author: walter
-* version: 1.0.0
-* date: 2011/3/29
-*/
+/**
+ * Tangram
+ * Copyright 2011 Baidu Inc. All rights reserved.
+ */
+ 
 ///import baidu.ui.createUI;
-///import baidu.dom.getAttr;
 ///import baidu.dom.setStyles;
 ///import baidu.dom._styleFilter.px;
 ///import baidu.dom.insertBefore;
@@ -22,12 +17,12 @@
 /**
  * Video类
  * @class Video类
- * @param {Object} [options] 选项
- * @config {DOMElement}         element     
- * @config {Function}           onload      页面加载时触发
- * @config {Function}           onplay      视频播放时触发
- * @config {Function}           onpause     视频暂停时触发
- * @config {Function}           onend       视频播放结束时触发，当loop为true时，此事件将不会触发
+ * @param {Object}              options       选项
+ * @config {DOMElement}         element       页面目标元素
+ * @config {Function}           [onload]      页面加载时触发
+ * @config {Function}           [onplay]      视频播放时触发
+ * @config {Function}           [onpause]     视频暂停时触发
+ * @config {Function}           [onend]       视频播放结束时触发，当loop为true时，此事件将不会触发
  * @returns {Video}                        Video类
  */
 baidu.ui.Video = baidu.ui.createUI( function() {
@@ -36,16 +31,14 @@ baidu.ui.Video = baidu.ui.createUI( function() {
     uiType: 'video',
     
     /**
-     * 渲染页面元素
+     * 初始化视频
      * @private
      */
-    _render: function() {
+    _init: function() {
         var me = this;
 
         me._initPoster();
         me._initListeners();
-
-        me.dispatchEvent('load');
     },
     
     /**
@@ -54,11 +47,11 @@ baidu.ui.Video = baidu.ui.createUI( function() {
      */
     _initPoster: function() {
         var me = this,
-        element = me.element,
-        width = element.offsetWidth,
-        height = element.offsetHeight,
-        posterUrl = baidu.dom.getAttr(element, 'poster'),
-        poster;
+            element = me.element,
+            width = element.offsetWidth,
+            height = element.offsetHeight,
+            posterUrl = element.getAttribute('poster'),
+            poster;
 
         if(posterUrl) {
             poster = baidu.dom.create('div');
@@ -84,17 +77,11 @@ baidu.ui.Video = baidu.ui.createUI( function() {
      */
     _initListeners: function() {
         var me = this,
-        element = me.element;
+            element = me.element;
 
-        me._playHandler = baidu.fn.bind('fire', me, 'play');
-        baidu.event.on(element, 'playing', me._playHandler);
-
-        me._pauseHandler = baidu.fn.bind('fire', me, 'pause');
-        baidu.event.on(element, 'pause', me._pauseHandler);
-
-        me._endHandler = baidu.fn.bind('fire', me, 'end');
-        baidu.event.on(element, 'ended', me._endHandler);
-
+        me.on(element, 'playing', 'fire', 'play');
+        me.on(element, 'pause', 'fire', 'pause');
+        me.on(element, 'ended', 'fire', 'end');
     },
     
     /**
