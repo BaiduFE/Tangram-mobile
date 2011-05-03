@@ -32,7 +32,7 @@ baidu.page.hideBar = function (fn) {
                         fn();
                     }, 100)
                 }
-            }, 0);
+            }, 20);
         };
     }
 
