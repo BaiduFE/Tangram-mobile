@@ -18,18 +18,14 @@
  *        }
  */
 baidu.fx.fade = function(elem, options) {
-    var 
-        curZ = baidu.getStyle(elem, 'z-index') == 'auto' ? 0 : baidu.getStyle(elem, 'z-index'),
-        out = options && options.out;
+    var out = options && options.out;
     
     options = baidu.object.extend(options || {}, {
         from : {
-            opacity : (out ? 1 : 0) ,
-            zIndex : (out ? curZ : curZ + 1)
+            opacity : (out ? 1 : 0)
         },
         to : {
-            opacity : (out ? 0 : 1) ,
-            zIndex : (out ? curZ : curZ + 1)
+            opacity : (out ? 0 : 1)
         }
     });
     baidu.fx.start(elem, options);

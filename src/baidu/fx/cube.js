@@ -4,8 +4,8 @@
  * 
  */
 
-///import baidu.dom.g
-///import baidu.fx.start
+///import baidu.dom.g;
+///import baidu.fx.start;
 
 /**
  * 立体翻转效果 

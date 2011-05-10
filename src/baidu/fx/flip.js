@@ -4,7 +4,7 @@
  * 
  */
 
-///import baidu.fx.start
+///import baidu.fx.start;
 
 /**
  * 翻转效果

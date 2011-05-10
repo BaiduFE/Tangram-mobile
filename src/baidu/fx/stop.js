@@ -19,9 +19,7 @@
  * @param {boolean} gotoEnd 是否跳至动画结束状态(会触发onfinish)
  */
 baidu.fx.stop = function(elem, gotoEnd) {
-     var 
-        d = baidu.dom,
-        elem = d.g(elem),
+    var elem = baidu.dom.g(elem),
         styles = elem["_tgFxTrsProp"];
         
     if (!styles) {
@@ -31,8 +29,9 @@ baidu.fx.stop = function(elem, gotoEnd) {
     for(var p in styles){
         //computed style是动画运行过程中的值
         //普通style是动画运动最终值，以此获得在当前状态停止的值或跳至最后状态停止
-        styles[prop] = gotoEnd ? baidu.getStyle(elem, prop)
-        styles[p] = gotoEnd ? d.getStyle(elem, p) : d.getComputedStyle(elem, p);
+        styles[p] = gotoEnd ? 
+                             baidu.dom.getStyle(elem, p) : 
+                             baidu.dom.getComputedStyle(elem, p);
     }
     
     elem.style['webkitTransitionDuration'] = null;
