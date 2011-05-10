@@ -33,16 +33,16 @@ baidu.ui.getAttributesByRole = function(element, role) {
         allElements = baidu.dom.query(roleSelector, element),
         otherElements = baidu.dom.query('[t-ui] ' + roleSelector, element),
         result = {},
+        tempElement,
         attr,
-        i,
-        length = allElements.length;
-        
-    for(i=0;i<length;i++) {
-        if(!baidu.array.contains(allElements[i], otherElements)) {
-            role = allElements[i].getAttribute('t-role');
+        i;
+
+    for(i=0;tempElement = allElements[i];i++) {
+        if(!baidu.array.contains(otherElements, tempElement)) {
+            role = tempElement.getAttribute('t-role');
             attr = baidu.object.extend({
-                element: allElements[i]
-            }, baidu.ui.getAttribute(allElements[i]));
+                element: tempElement
+            }, baidu.ui.getAttribute(tempElement));
 
             if(result[role]) {
                 result[role].push(attr);

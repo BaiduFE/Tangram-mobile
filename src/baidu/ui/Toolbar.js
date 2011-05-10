@@ -23,6 +23,8 @@
  * @config {Boolean}         [hideOnTap = true]     点击是否隐藏
  * @config {String}          [top]                  顶部距离
  * @config {String}          [bottom]               底部距离
+ * @config {String}          [left]                 左侧距离
+ * @config {String}          [right]                右侧距离
  * @returns {Toolbar}              Toolbar类
  * */
 baidu.ui.Toolbar = baidu.ui.createUI( function() {
@@ -38,6 +40,7 @@ baidu.ui.Toolbar = baidu.ui.createUI( function() {
      * */
     _init: function() {
         var me = this;
+        
         me._update();
         me._initListener();
     },
@@ -66,6 +69,8 @@ baidu.ui.Toolbar = baidu.ui.createUI( function() {
         var me = this,
             top = me.top,
             bottom = me.bottom,
+            left = me.left,
+            right = me.right,
             element = me.element,
             isNumber = baidu.lang.isNumber;
 
@@ -76,10 +81,18 @@ baidu.ui.Toolbar = baidu.ui.createUI( function() {
         } else {
             top = window.pageYOffset;
         }
+        
+        if(isNumber(left)) {
+            left += window.pageXOffset;
+        } else if(isNumber(right)) {
+            left = window.pageXOffset + window.innerWidth - element.offsetWidth - right;
+        } else {
+            left = window.pageXOffset;
+        }
 
         baidu.dom.setStyles(element, {
             "top" : top,
-            "left" : 0
+            "left" : left
         });
     },
     

@@ -8,6 +8,9 @@
  * date: 2010/12/02
  */
 
+///import baidu.ui.getParent;
+///import baidu.ui.getAttribute;
+///import baidu.ui.getAttributesByRole;
 ///import baidu.ui.Base;
 ///import baidu.lang.Event;
 ///import baidu.object.extend;
@@ -38,7 +41,13 @@ baidu.ui.createUI = function(constructor, options) {
             baidu.object.extend(me, opt);
 
             me.classPrefix = me.classPrefix || "tangram-" + me.uiType.toLowerCase();
-
+            
+            //setup属性和role
+            me.element = baidu.dom.g(me.element);
+            me.roles = baidu.ui.getAttributesByRole(me.element);
+            baidu.object.extend(me, baidu.ui.getAttribute(me.element));
+            
+            
             //执行控件自己的构造器
             constructor.apply(me, arguments);
 

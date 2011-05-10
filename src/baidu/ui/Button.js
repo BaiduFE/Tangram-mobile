@@ -19,7 +19,7 @@
  * @config {Function}           [onenable]    当调用button的实例方法enable，使得按钮有效时触发。
  * @returns {Button}                        Button类
  */
-baidu.ui.Button = baidu.ui.createUI( function() {
+baidu.ui.Button = baidu.ui.createUI( function(options) {
 
 }).extend({
     uiType: 'button',

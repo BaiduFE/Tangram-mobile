@@ -3,11 +3,11 @@
  * Copyright 2011 Baidu Inc. All rights reserved.
  */
 
-///import baidu.ui.getParent;
-///import baidu.ui.getAttribute;
-///import baidu.ui.getAttributesByRole;
+///import baidu.ui;
 ///import baidu.dom.g;
 ///import baidu.dom.remove;
+///import baidu.dom.addClass;
+///import baidu.array.each;
 ///import baidu.event.on;
 ///import baidu.lang.isString;
 
@@ -18,22 +18,37 @@ baidu.ui.Base = {
      */
     setup: function() {
         var me = this;
+        me._create();
         me._setup();
         me._init();
+    },
+    
+    /**
+     * 设置样式和guid
+     */
+    _create: function(){
+        var me = this,
+            name,
+            element = me.element,
+            roles = me.roles;
+            
+        baidu.dom.addClass(element, me.getClass());
+        
+        for(name in roles){
+            baidu.array.each(roles[name], function(item){
+                baidu.dom.addClass(item.element, me.getClass(name));
+            });
+        }
+        
+        element.setAttribute('t-guid', me.guid);
     },
     
     /**
      * 读取页面配属项
      */
     _setup: function() {
-        var me = this,
-            element = me.element = baidu.dom.g(me.element);
-
-        me.parent = baidu.ui.getParent(element);
-        me.roles = baidu.ui.getAttributesByRole(element);
-        baidu.object.extend(me, baidu.ui.getAttribute(element));
-
-        element.setAttribute('t-guid', me.guid);
+        var me = this;
+        me.parent = baidu.ui.getParent(me.element);  
     },
     
     /**

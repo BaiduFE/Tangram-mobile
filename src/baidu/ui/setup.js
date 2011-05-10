@@ -23,9 +23,8 @@ baidu.ui.setup = function(fn, element) {
             element,
             uiArray = [];
 
-        //统一setup
-        for(i=0;i<length;i++) {
-            element = elements[i];
+        //统一创建
+        for(i=0;element = elements[i];i++) {
             type = element.getAttribute('t-ui');
 
             if(type) {
@@ -35,13 +34,18 @@ baidu.ui.setup = function(fn, element) {
                     ui = new baidu.ui[type]({
                         element: element
                     });
-                    ui._setup();
+                    ui._create();
                     uiArray.push(ui);
                 }
 
             }
         }
-
+        
+        //统一setup
+        for(i=0;i<length;i++) {
+            uiArray[i]._setup();
+        }
+        
         //统一初始化
         for(i=0;i<length;i++) {
             uiArray[i]._init();

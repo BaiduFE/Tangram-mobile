@@ -28,10 +28,10 @@ baidu.ui.getAttribute = function(element){
         for (; len--; ) {
             var s = attrs[len],
                 pos = s.indexOf(':'),
-                name = trim(pos >= 0 ? s.substring(0, pos) : s),
-                value = pos >= 0 ? trim(s.substring(pos + 1)) || 'true' : 'true';
+                name = trim(pos >= 0 ? s.slice(0, pos) : s),
+                value = pos >= 0 ? trim(s.slice(pos + 1)) || 'true' : 'true';
 
-            params[baidu.string.toCamelCase(trim(name))] =
+            params[baidu.string.toCamelCase(name)] =
                 /^\d+(\.\d+)?$/.test(value)
                     ? value - 0
                     : value == 'true' ? true : value == 'false' ? false : value;
