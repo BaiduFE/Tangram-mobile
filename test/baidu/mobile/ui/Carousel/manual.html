@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1.0, maximum-scale=1.0, user-scalable=no;"/>
+<title>无标题文档</title>
+<script src="../../../../../src/import.php?f=baidu.ui.get,baidu.ui.setup,baidu.ui.Carousel" type="text/javascript"></script>
+<style>
+#outercarousel{
+  width : 300px; 
+  height : 50px;
+}
+#innercarousel{
+  width : 1000px;
+}
+#innercarousel div{
+  width : 150px;
+  height: 50px;
+  float: left;
+}
+</style>
+</head>
+<body>
+    <div id="outercarousel" t-ui="carousel" t-attr="flip:page"> 
+      <div id="innercarousel" t-role="content">
+        <div style="background-color:yellow">first</div>
+        <div style="background-color:blue">second</div>
+        <div style="background-color:red">third</div>
+        <div style="background-color:silver">forth</div>
+        <div style="background-color:green">fivth</div>
+      </div>
+    </div>
+</body>
+<script>
+    baidu.ui.setup(function(){
+        var carousel = baidu.ui.get(baidu.g("outercarousel"));
+        carousel.onswipe = function(){
+           console.log('scrolled');
+        }
+    });
+</script>
+</html>
+

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1.0, maximum-scale=1.0, user-scalable=no;"/>
+<title>无标题文档</title>
+<script src="../../../../../src/import.php?f=baidu.ui.set,baidu.ui.setup,baidu.ui.Slider" type="text/javascript"></script>
+<style>
+input:focus, select:focus, textarea:focus {outline: 0px solid #ffffff;}/* 去掉safer输入的边框*/
+
+input,textarea{
+    -webkit-user-select: text;
+}
+
+*{
+    -webkit-user-select: none;/* 去掉拷贝*/
+}
+
+*, ::after, ::before {
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    -webkit-user-select: none;
+    -webkit-text-size-adjust: none;
+    -webkit-touch-callout: none;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.tangram-slider {
+    height: 2.2em;
+    margin: .6em;
+    min-height: 0;
+    -webkit-border-top-right-radius: .4em;
+    border-top-right-radius: .4em;
+    width: auto;
+    height: .8em;
+    top: .737em;
+    left: 0;
+    right: 0;
+    margin: 0 .925em;
+    background-color: #DDD;
+    background-image: -webkit-gradient(linear,0% 0,0% 100%,color-stop(0%,#C4C4C4),color-stop(10%,#D0D0D0),color-stop(65%,#DDD),color-stop(100%,#DEDEDE));
+    background-image: linear-gradient(top,#C4C4C4 0,#D0D0D0 10%,#DDD 65%,#DEDEDE 100%);
+    border: .1em solid rgba(0, 0, 0, 0.1);
+    border-bottom: 0;
+    -webkit-box-shadow: rgba(255, 255, 255, 0.7) 0 .1em 0;
+    -webkit-border-radius: .4em;
+    border-radius: .4em;
+}
+
+.tangram-slider-thumb {
+    z-index: 1;
+    position: absolute;
+    width: 1.85em;
+    height: 1.85em;
+    top: .175em;
+    left: 1em;
+    border: .1em solid #919191;
+    -webkit-border-radius: .925em;
+    border-radius: .925em;
+    background-color: #DDD;
+    background-image: -webkit-gradient(linear,0% 0,0% 100%,color-stop(0%,white),color-stop(2%,#F7F7F7),color-stop(100%,#CBCBCB));
+    background-image: linear-gradient(top,white 0,#F7F7F7 2%,#CBCBCB 100%);
+    -webkit-box-shadow: inset rgba(255, 255, 255, 0.5) 0 0 .1em,inset rgba(255, 255, 255, 0.3) 0 -0.1em 0;
+    -webkit-background-clip: padding;
+    background-clip: padding-box;
+}
+
+</style>
+</head>
+<body>
+    <div id='slider' t-ui='slider' t-attr='min:100;max:200;value:0;'>  
+        <div t-role='thumb'></div>
+    </div>
+</body>
+<script>
+    baidu.ui.setup(function(){
+        baidu.ui.set('slider', {
+            ontap: function(e){
+                console.log('tapped');
+            },
+            onslide: function(){
+                console.log(this.getValue());
+            }
+        });
+    });
+</script>
+</html>
+

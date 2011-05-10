@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0, maximum-scale=1.0, user-scalable=no;"/>
+<title>无标题文档</title>
+<script src="../../../../../src/import.php?f=baidu.ui.get,baidu.ui.setup,baidu.ui.Toolbar" type="text/javascript"></script>
+<style>
+.toolbar {
+    height:50px;
+    background-color: silver;
+}
+    
+</style>
+</head>
+<body style="width:2000px;">
+    <div class="toolbar" id="toolbartop" t-ui='Toolbar' class="toolbar">这是一个头部toolbar</div>
+    <div class="toolbar" id="toolbarbottom" t-ui='Toolbar' class="toolbar" t-attr="bottom:0;">这是一个尾部toolbar</div>
+</body>
+<script>
+    baidu.ui.setup(function(){
+        
+    });
+</script>
+</html>
+

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <title>test</title>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+      <meta name="viewport" content="width=device-width,initial-scale=1.0, maximum-scale=1.0, user-scalable=no;"/>
+      <script src="../../../../../src/import.php?f=baidu.ui.set,baidu.ui.setup,baidu.ui.Page,baidu.ui.Listview,baidu.ui.Listview.*,baidu.ui.Button,baidu.ui.Button.*" type="text/javascript"></script>
+      <style>
+          body{
+              margin:0;
+              padding:0;
+          }
+      </style>
+   </head>
+   <body>
+           
+    <div t-ui='page' id='page'>
+        <div t-ui='listview'>
+        <div style="height:50px;background-color:blue;" t-role='item' t-attr='pageId:page1'>item111111111111111111111111</div>
+        <div style="height:50px;background-color:yellow;" t-role='item' t-attr='pageId:page2'>item2222222222222222222222</div>
+        </div>
+    </div>
+    <div t-ui='page' id="page1" style="height:100px;background-color:blue;display:none;">
+        <button class="button" t-ui='button' t-attr='type:back;pageId:page'>touch me harder!</button>
+        <div t-ui='listview'>
+        <div style="height:50px;background-color:silver;" t-role='item' t-attr='pageId:page3'>item3333333333333333333333</div>
+        </div>
+    </div>
+    <div t-ui='page' id="page2" style="height:100px;background-color:yellow;display:none;">
+        <button class="button" t-ui='button' t-attr='type:back;pageId:page'>touch me harder!</button>
+    </div>
+    <div t-ui='page' id="page3" t-attr='pageurl:"page1.html"' style="height:100px;background-color:silver;display:none;">
+        <button class="button" t-ui='button' t-attr='type:back;pageId:page1'>touch me harder!</button>
+    </div>
+  </body>
+  <script>
+    baidu.ui.setup(function(){
+        
+    });
+      
+  </script>
+</html>
