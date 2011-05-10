@@ -5,7 +5,6 @@
  */
 
 ///import baidu.event;
-///import baidu.event.on
 
  /**
  * 双手指放大/缩小/旋转事件
@@ -15,8 +14,7 @@
  * @return {Object}   handlers   事件侦听hash对象
  */
 baidu.event.pinch = function (elem, listener) {
-    var 
-        stopFunc = function(e) {
+    var stopFunc = function(e) {
             e.stopPropagation();
             e.preventDefault();
         },

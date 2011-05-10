@@ -1,16 +1,12 @@
 /*
- * Tangram Mobile
- * Copyright 2011 Baidu Inc. All rights reserved.
- *
- */
+* Tangram Mobile
+* Copyright 2011 Baidu Inc. All rights reserved.
+*
+*/
 
-///import baidu.event;
+///import baidu.event.getTouchInfo;
 
-baidu.event.dragTiggerThreshold = 5;
-
-
-
- /**
+/**
  * 触摸拖动事件
  * 对事件对象e扩展2个属性：
  *  deltaX: {number}   X轴拖动起始和终点位置差
@@ -21,32 +17,48 @@ baidu.event.dragTiggerThreshold = 5;
  * @return {Object}   handlers   事件侦听hash对象
  */
 baidu.event.drag = function (elem, listener) {
-    var 
-        tiggerThreshold = baidu.event.swipeTiggerThreshold,
+    var tiggerThreshold = baidu.event.swipeTiggerThreshold,
         startX, startY,
+        previousX, previousY,
         lock,
+        touch,
+        dragging,
         handlers = {
             touchstart : function (e) {
                 //两个以上手指接触时不触发swipe事件
                 lock = (e.touches && e.touches.length > 1);
-                var touch = e.targetTouches ? e.targetTouches[0] : e;
-                    startX = touch.pageX;
-                    startY = touch.pageY;
+    
+                touch = baidu.event.getTouchInfo(e);
+                previousX = startX = touch.pageX;
+                previousY = startY = touch.pageY;
+                dragging = true;
             },
             touchmove : function (e) {
-                if (lock) return;
-                var touch = e.changedTouches ? e.changedTouches[0] : e,
-                    deltaX = touch.pageX - startX,
-                    deltaY = touch.pageY - startY,
-                    distanceX: Math.abs(deltaX),
-                    distanceY: Math.abs(deltaY);
-                
-                if ((distanceX >= tiggerThreshold) || (distanceY >= tiggerThreshold)) {
-                    e["deltaX"] = deltaX;
-                    e["deltaY"] = deltaY;
-                    listener.call(elem, e);
+                if (lock || !dragging){
+                    return;
                 }
+               
+                touch = baidu.event.getTouchInfo(e),
+                deltaX = touch.pageX - startX,
+                deltaY = touch.pageY - startY,
+                distanceX = Math.abs(deltaX),
+                distanceY = Math.abs(deltaY);
+    
+                touch["deltaX"] = deltaX;
+                touch["deltaY"] = deltaY;
+                touch["previousX"] = previousX;
+                touch["previousY"] = previousY;
+    
+                listener.call(elem, touch, e);
+    
+                previousX = touch.pageX;
+                previousY = touch.pageY;
+    
+            },
+            touchend: function(e) {
+                dragging = false;
             }
-        }
+        };
+        
     return handlers;
 };

@@ -4,7 +4,7 @@
  * 
  */
 
-///import baidu.event;
+///import baidu.event.getTouchInfo;
 ///import baidu.browser.isSupportTouch;
 
 baidu.event.CANCLE_TAP = "_tgEvtCancleTap";
@@ -22,13 +22,14 @@ baidu.event._tap = function (elem, listener, type, dbtapThreshold) {
     var 
         startTime,
         isCancel,
+        touch,
         CANCLE_TAP = baidu.event.CANCLE_TAP,
         TAP_LAST_TIME = baidu.event.TAP_LAST_TIME,
         isSupportTouch = baidu.browser.isSupportTouch,
         
         handlers = {
             touchstart : function (e) {
-                var touch = e.targetTouches ? e.targetTouches[0] : e;
+                touch = baidu.event.getTouchInfo(e);
                 isCancel = false;
                 startTime = e.timeStamp;
             },
@@ -37,6 +38,7 @@ baidu.event._tap = function (elem, listener, type, dbtapThreshold) {
                 if(isSupportTouch){
                     isCancel = true;
                 }
+                touch = baidu.event.getTouchInfo(e);
             },
             
             touchend : function (e) {
@@ -51,12 +53,13 @@ baidu.event._tap = function (elem, listener, type, dbtapThreshold) {
                             elem[TAP_LAST_TIME] = e.timeStamp;
                         }
                     } else {
+                        
                         //setTimeout为了延迟到dbtap结束后(设置了flag后)再执行，
                         setTimeout(function() {
                             if (elem[CANCLE_TAP] === true) {
                                 elem[CANCLE_TAP] = false;
                             } else {
-                                listener.call(elem, e);
+                                listener.call(elem, touch, e);
                             }
                         }, 0);
                     }

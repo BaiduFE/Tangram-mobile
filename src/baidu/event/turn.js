@@ -5,6 +5,7 @@
 */
 
 ///import baidu.event;
+///import baidu.page.hideBar;
 
 baidu.event.turnHideBar = true;
 

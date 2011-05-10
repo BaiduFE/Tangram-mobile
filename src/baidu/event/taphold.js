@@ -5,7 +5,6 @@
  */
 
 ///import baidu.event;
-///import baidu.event.on
 
 //按下n毫秒触发taphold事件
 baidu.event.tapholdThreshold = 600;

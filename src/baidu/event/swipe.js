@@ -4,7 +4,7 @@
 *
 */
 
-///import baidu.event;
+///import baidu.event.getTouchInfo;
 ///import baidu.object.each;
 
 //左右滑动n像素触发swipe事件
@@ -34,13 +34,13 @@ baidu.event.swipe = function (elem, listener) {
         touch,
         handlers = {
             touchstart : function (e) {
-                touch = e.targetTouches ? e.targetTouches[0] : e;
+                touch = baidu.event.getTouchInfo(e);
                 startX = touch.pageX;
                 startY = touch.pageY;
                 startTime = e.timeStamp;
             },
             touchmove: function(e) {
-                touch = e.changedTouches ? e.changedTouches[0] : e;
+                touch = baidu.event.getTouchInfo(e);
                 deltaX = touch.pageX - startX;
                 distanceX = Math.abs(deltaX);
                 distanceY = Math.abs(touch.pageY - startY);
@@ -51,11 +51,11 @@ baidu.event.swipe = function (elem, listener) {
                 }
             },
             touchend : function (e) {
-                if(distanceX >= tiggerThreshold && distanceY<=cancelThreshold) {
-                    e["direction"] = (deltaX < 0) ? 'left' : 'right';
-                    e["distance"] = distanceX;
-                    e["delta"] = deltaX;
-                    listener.call(elem, e);
+                if(distanceX >= tiggerThreshold && distanceY <= cancelThreshold) {
+                    touch["direction"] = (deltaX < 0) ? 'left' : 'right';
+                    touch["distance"] = distanceX;
+                    touch["delta"] = deltaX;
+                    listener.call(elem, touch, e);
                 }
             }
         }

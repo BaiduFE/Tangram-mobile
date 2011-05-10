@@ -5,7 +5,7 @@
  */
 
 ///import baidu.event;
-///import baidu.event.on;
+///import baidu.browser.isSupportTouch;
 
  /**
  * 屏幕滚动事件
@@ -32,7 +32,7 @@ baidu.event.customScroll = function (elem, listener) {
         },
         
         handlers = {
-            touchmove : func,
+            touchmove : baidu.browser.isSupportTouch ? func : null,
             scroll : func
         }
     return handlers;

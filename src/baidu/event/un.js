@@ -22,6 +22,7 @@ baidu.event.un = function(elem, type, listener) {
     
     var lis = baidu.event._listeners, 
         len = lis.length,
+        _event,
         isRemoveAll = !listener;
     
     while (len--) {
@@ -34,11 +35,12 @@ baidu.event.un = function(elem, type, listener) {
             //item[3] is handlers
 			if (item[3]) {
 				baidu.object.each(item[3], function(evtFunc, evtName) {
-					evtName = baidu.event.getCompat(evtName);
-					elem.removeEventListener(evtName, evtFunc, false);
+					_event = baidu.event.getCompat(elem, evtName);
+					_event.element.removeEventListener(_event.name, evtFunc, false);
 				});
 			} else {
-				elem.removeEventListener(type, listener, false);
+			    _event = baidu.event.getCompat(elem, type);
+				_event.element.removeEventListener(_event.name, listener, false);
 			}
 	
             lis.splice(len, 1);
