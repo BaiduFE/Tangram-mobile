@@ -28,6 +28,8 @@ baidu.ui.Popup = baidu.ui.createUI(function() {
     zIndex: 999,
 
     showFx: baidu.fx.fade,
+    
+    hideFx: baidu.fx.fade,
 
     /**
      * 数据初始化
@@ -48,7 +50,9 @@ baidu.ui.Popup = baidu.ui.createUI(function() {
     _init: function() {
         var me = this,
             element = me.element;
-
+        
+        baidu.ui.Base._init.call(me);
+        
         baidu.dom.setStyles(element, {
             'display': 'none',
             'position': 'absolute',
@@ -59,7 +63,6 @@ baidu.ui.Popup = baidu.ui.createUI(function() {
             me._addMask();
         }
 
-        me.on(window, 'turn', '_onTurn');
         me.dispatchEvent('onload');
     },
 
@@ -140,7 +143,7 @@ baidu.ui.Popup = baidu.ui.createUI(function() {
             baidu.ui.Mask._instance.close();
         }
 
-        me.showFx(element, {
+        me.hideFx(element, {
             'duration': 500,
             'out': true, 
             'onfinish': function(){
@@ -148,6 +151,5 @@ baidu.ui.Popup = baidu.ui.createUI(function() {
                me.dispatchEvent('close');
             }
        });
-    },
-
+    }
 });

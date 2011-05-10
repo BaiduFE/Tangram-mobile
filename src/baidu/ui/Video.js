@@ -37,6 +37,8 @@ baidu.ui.Video = baidu.ui.createUI( function() {
     _init: function() {
         var me = this;
         
+        baidu.ui.Base._init.call(me);
+        
         me._initPoster();
         me._initListeners();
     },

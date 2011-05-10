@@ -41,8 +41,13 @@ baidu.ui.Toolbar = baidu.ui.createUI( function() {
     _init: function() {
         var me = this;
         
+        baidu.ui.Base._init.call(me);
+        
+        if(me.hideOnTap) {
+            me.on(document, 'tap', '_onDocTap');
+        };
+        
         me._update();
-        me._initListener();
     },
     
     /**
@@ -97,21 +102,6 @@ baidu.ui.Toolbar = baidu.ui.createUI( function() {
     },
     
     /**
-     * 初始化事件监听
-     * @private
-     */
-    _initListener: function(){
-        var me = this;
-        
-        me.on(document, 'customScroll', '_onCustomScroll');
-        me.on(window, 'turn', '_onTurn');
-        
-        if(me.hideOnTap) {
-            me.on(document, 'tap', '_onTap');
-        };
-    },
-    
-    /**
      * 屏幕滚动事件
      * @private
      */
@@ -131,7 +121,7 @@ baidu.ui.Toolbar = baidu.ui.createUI( function() {
      * 单击隐藏事件
      * @private
      * */
-    _onTap: function() {
+    _onDocTap: function() {
         baidu.dom.toggle(this.element);
     },
     

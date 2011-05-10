@@ -51,6 +51,16 @@ baidu.ui.Base = {
         me.parent = baidu.ui.getParent(me.element);  
     },
     
+    _init: function() {
+        var me = this,
+            element = me.element;
+            
+        me.on(element, 'tap', '_onTap');
+        me.on(window, 'turn', '_onTurn');
+        me.on(element, 'swipe', '_onSwipe');
+        me.on(document, 'customScroll', '_onCustomScroll'); 
+    },
+    
     /**
      * 获得class，支持skin
      *
@@ -93,14 +103,17 @@ baidu.ui.Base = {
      * @return {HTMLElement} 目标元素
      */
     on: function(elem, type, listener){
+        if(baidu.lang.isString(listener) && !this[listener]) {
+            return;
+        }
+
         var me = this,
-            xargs = arguments.length > 3 ? [].slice.call(arguments, 3) : null,
-            handler = function () {
-                var fn = baidu.lang.isString(listener) ? me[listener] : listener,
-                    args = (xargs) ? xargs.concat([].slice.call(arguments, 0)) : arguments;
-                return fn.apply(me, args);
-            };
-            
+        xargs = arguments.length > 3 ? [].slice.call(arguments, 3) : null,
+        handler = function () {
+            var fn = baidu.lang.isString(listener) ? me[listener] : listener,
+            args = (xargs) ? xargs.concat([].slice.call(arguments, 0)) : arguments;
+            return fn.apply(me, args);
+        };
         baidu.event.on(elem, type, handler, true);
     },
     

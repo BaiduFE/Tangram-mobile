@@ -32,7 +32,7 @@ baidu.ui.Listview = baidu.ui.createUI(function(options){
      */
     _init: function(){
       var me = this;
-      
+      baidu.ui.Base._init.call(me);
       me.dispatchEvent('load');
     }
 });

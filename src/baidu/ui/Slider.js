@@ -73,9 +73,11 @@ baidu.ui.Slider = baidu.ui.createUI( function(options) {
      */
     _init: function(){
       var me = this;
+      
+      baidu.ui.Base._init.call(me);
+      
       me._setThumbPosition();
       me.on(me._thumb, 'drag', '_onSlide');
-      me.on(me.element, 'tap', '_onTap');
       me.dispatchEvent('load');
     },
     

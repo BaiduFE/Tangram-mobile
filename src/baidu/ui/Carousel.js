@@ -65,10 +65,9 @@ baidu.ui.Carousel = baidu.ui.createUI( function() {
     _init: function() {
         var me = this,
             element = me.element;
-        
+            
+        baidu.ui.Base._init.call(me);
         baidu.dom.setStyle(element, "overflow", "hidden");
-
-        me.on(element, 'swipe', '_onSwipe'); 
     },
 
     /**
@@ -92,7 +91,7 @@ baidu.ui.Carousel = baidu.ui.createUI( function() {
     goToItem: function(index) {
         var me = this;        
         index = Math.min(Math.max(0, index), me.items.length - 1);
-        me.showFx(me.content, -index * me.itemWidth);
+        me._translate(me.content, -index * me.itemWidth);
         me.activeitem = index;
     },
     
@@ -101,7 +100,7 @@ baidu.ui.Carousel = baidu.ui.createUI( function() {
      * @param {HTMLElementv} element 目标元素
      * @param {Number} deltaX 移动距离
      */
-    showFx: function(element, deltaX){
+    _translate: function(element, deltaX){
          var me = this;
          baidu.fx.translate(element, [deltaX, 0], [], {
             "onfinish": function(){

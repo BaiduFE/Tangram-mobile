@@ -41,8 +41,7 @@ baidu.ui.Button = baidu.ui.createUI( function(options) {
      */
     _init: function() {
         var me = this;
-        
-        me.on(me.element, 'tap', '_onTap');
+        baidu.ui.Base._init.call(me);
         me.dispatchEvent("onload");
     },
     

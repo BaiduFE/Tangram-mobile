@@ -53,4 +53,4 @@ baidu.ui.getAttributesByRole = function(element, role) {
     }
 
     return result;
-}
+};

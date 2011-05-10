@@ -48,14 +48,14 @@ baidu.ui.Mask = baidu.ui.createUI(function() {
       var me = this,
           element = me.element;
       
+      baidu.ui.Base._init.call(me);
+      
       baidu.dom.setStyles(element, {
           'display': 'none',
           'position': 'absolute', 
           'top': 0, 
           'zIndex': me.zIndex
       });
-
-      me.on(window, 'turn', '_onTurn');
     },
 
     /**

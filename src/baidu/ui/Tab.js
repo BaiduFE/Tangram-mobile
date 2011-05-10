@@ -46,6 +46,8 @@ baidu.ui.Tab = baidu.ui.createUI(function(options){
     _init: function(){
       var me = this;
       
+      baidu.ui.Base._init.call(me);
+      
       baidu.array.each(me.heads, function(item, i){
           me.on(item, 'tap', '_onSwitch', i);
       });
@@ -76,7 +78,7 @@ baidu.ui.Tab = baidu.ui.createUI(function(options){
         baidu.dom.addClass(heads[i], currentClass);
         baidu.dom.removeClass(heads[me.currentIndex], currentClass);
         
-        me.slide(i, function(){
+        me.switchTo(i, function(){
             me.dispatchEvent('switch');
         });
     },
@@ -86,7 +88,7 @@ baidu.ui.Tab = baidu.ui.createUI(function(options){
      * @param {Number} index Tab index
      * @param {Function} fn 回调函数
      */
-    slide: function(index, fn){
+    switchTo: function(index, fn){
         var me = this,
             content = me.contents[index], 
             direction = index > me.currentIndex ? 'left' : 'right',

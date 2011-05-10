@@ -28,8 +28,10 @@ baidu.ui.Page = baidu.ui.createUI( function(options) {
      */
     _init: function() {
         var me = this;
+        
+        baidu.ui.Base._init.call(me);
+        
         me._updatePage();
-        me.on(window, 'turn', '_onTurn');
         me.dispatchEvent('init');
     },
     
@@ -68,11 +70,11 @@ baidu.ui.Page = baidu.ui.createUI( function(options) {
             baidu.ajax.get(me.pageUrl, function(xhr, responseText) {
                 baidu.dom.insertHTML(me.element, 'beforeend', responseText);
                 me.loaded = true;
-                me.slide(page, 'left');
+                me.slideTo(page, 'left');
                 me.dispatchEvent('loadend');
             })
         } else {
-            me.slide(page, 'left');
+            me.slideTo(page, 'left');
         }
     },
     
@@ -81,7 +83,7 @@ baidu.ui.Page = baidu.ui.createUI( function(options) {
      * @param {HTMLElement} page 当前页面dom对象
      * @param {String} direction 滑动方向
      */
-    slide: function(page, direction){
+    slideTo: function(page, direction){
         var me = this;
         
         if(baidu.ui.Page._moving){

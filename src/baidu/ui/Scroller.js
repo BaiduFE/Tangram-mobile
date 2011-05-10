@@ -15,14 +15,6 @@
  *         参考自iScroll http://cubiq.org/iscroll
  * @param {String|HTMLElment} 目标元素
  * @param {Object} options 选项
- *     {
- momentum: true,            //是否启用动力加速
- scrollbar: true,             //是否显示滚动条
- desktopCompat: true,   //是否应用到桌面浏览器
- fadeScrollbar : true,     //是否渐隐渐现滚动条
- shrinkScrollbar : true,   //到边界时是否收缩滚动条
- scrollbarColor : "rgba(0,0,0,0.5)"   //滚动条颜色
- }
  * @return baidu.ui.Scroller实例
  */
 baidu.ui.Scroller = baidu.ui.createUI( function(options) {
@@ -56,7 +48,9 @@ baidu.ui.Scroller = baidu.ui.createUI( function(options) {
     _init: function() {
         var me = this,
             element = me.element;
-
+        
+        baidu.ui.Base._init.call(me);
+        
         baidu.setStyles(element, {
             webkitTransitionProperty : '-webkit-transform',
             webkitTransitionTimingFunction : 'cubic-bezier(0,0,0.25,1)',
@@ -69,7 +63,7 @@ baidu.ui.Scroller = baidu.ui.createUI( function(options) {
         me.on(element, 'touchstart', '_onTouchStart');
         me.on(element, 'touchmove', '_onTouchMove');
         me.on(element, 'touchend', '_onTouchEnd');
-        me.on(window, 'turn', '_onTurn');
+
         me.on(element, 'DOMSubtreeModified', '_onDOMModified');
         
         me.dispatchEvent("onload");
@@ -101,7 +95,7 @@ baidu.ui.Scroller = baidu.ui.createUI( function(options) {
     _onDOMModified : function(e) {
         var me = this;
         if (me.element.offsetHeight != me.elemHeight) {
-            me.refresh();
+            me.update();
         }
     },
     
