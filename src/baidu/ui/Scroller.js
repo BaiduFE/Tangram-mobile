@@ -37,7 +37,7 @@ baidu.ui.Scroller = baidu.ui.createUI( function(options) {
         me.wrapper = me.element.parentNode;
         me.x = 0;
         me.y = 0;
-        me.update();
+        me._update();
         me.dispatchEvent('setup');
     },
     
@@ -72,7 +72,7 @@ baidu.ui.Scroller = baidu.ui.createUI( function(options) {
     /**
      * 更新区域信息
      */
-    update : function() {
+    _update : function() {
         var me = this;
 
         me.wrapperWidth = me.wrapper.clientWidth;
@@ -95,7 +95,7 @@ baidu.ui.Scroller = baidu.ui.createUI( function(options) {
     _onDOMModified : function(e) {
         var me = this;
         if (me.element.offsetHeight != me.elemHeight) {
-            me.update();
+            me._update();
         }
     },
     
@@ -264,6 +264,18 @@ baidu.ui.Scroller = baidu.ui.createUI( function(options) {
                        baidu.fx.getTranslate(me.x, me.y));
         
          me.dispatchEvent("setposition");
+    },
+    
+    /**
+     * 屏幕翻转触发事件
+     * @param {object} e event对象
+     * @private
+     * */
+    _onTurn: function(e) {
+        var me = this;
+        
+        me._update();
+        me.fire('turn', e);
     },
     
     /**
