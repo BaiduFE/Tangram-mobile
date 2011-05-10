@@ -45,7 +45,7 @@ baidu.event._tap = function (elem, listener, type, dbtapThreshold) {
                 if (!isCancel) {
                     if (type == "dbtap") {
                         if (elem[TAP_LAST_TIME] && e.timeStamp - elem[TAP_LAST_TIME] <= dbtapThreshold) {
-                            fn.call(elem, e);
+                            listener.call(elem, e);
                             e.preventDefault();
                             elem[CANCLE_TAP] = true;
                             elem[TAP_LAST_TIME] = 0;

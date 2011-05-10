@@ -4,7 +4,7 @@
  * 
  */
 
-///import baidu.event;
+///import baidu.event.getTouchInfo;
 
 //按下n毫秒触发taphold事件
 baidu.event.tapholdThreshold = 600;
@@ -17,8 +17,7 @@ baidu.event.tapholdThreshold = 600;
  * @return {Object}   handlers   事件侦听hash对象
  */
 baidu.event.taphold = function (elem, listener) {
-    var 
-        tapholdThreshold = baidu.mobile.event.tapholdThreshold,
+    var tapholdThreshold = baidu.event.tapholdThreshold,
         timeout,
         clearFn = function (e) {
             clearTimeout(timeout);
@@ -30,11 +29,11 @@ baidu.event.taphold = function (elem, listener) {
                     clearTimeout(timeout);
                     return;
                 }
-                var touch = e.targetTouches ? e.targetTouches[0] : e;
+                var touch = baidu.event.getTouchInfo;
                 timeout = setTimeout(function(){
                     listener.call(elem, e);
-                    if (baidu.mobile.event.CANCLE_TAP) {
-                        elem[baidu.mobile.event.CANCLE_TAP] = true;
+                    if (baidu.event.CANCLE_TAP) {
+                        elem[baidu.event.CANCLE_TAP] = true;
                     }
                 }, tapholdThreshold);
             },
