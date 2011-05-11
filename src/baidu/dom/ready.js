@@ -16,7 +16,7 @@
  * @remark
  * 如果有条件将js放在页面最底部, 也能达到同样效果，不必使用该方法。
  * @meta standard
- */
+ */ 
 
 (function() {
     var readyFunc = [],
@@ -24,10 +24,10 @@
 
     function DOMReady() {
         if(!ready) {
+            ready = true;
             for (var i = 0, l = readyFunc.length; i < l; i++) {
                 readyFunc[i]();
             }
-            ready = true;
         }
     };
 
