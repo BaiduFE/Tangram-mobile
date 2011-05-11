@@ -6,6 +6,7 @@
 
 ///import baidu.event;
 ///import baidu.page.hideBar;
+///import baidu.fn.bind;
 
 baidu.event.turnHideBar = true;
 
@@ -26,7 +27,7 @@ baidu.event.turn = function (elem, listener) {
     function fn(e) {
         var turnHideBar = baidu.event.turnHideBar;
         if(turnHideBar) {
-            baidu.page.hideBar(listener, elem, e);
+            baidu.page.hideBar(baidu.fn.bind(listener, elem, e));
         } else {
             listener.call(elem, e);
         }
