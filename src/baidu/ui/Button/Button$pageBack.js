@@ -22,7 +22,7 @@ baidu.ui.Button.register( function(me) {
         if(me.pageId) {
             me.on(me.element, 'tap', function() {
                 var page = baidu.ui.get(me.pageId);
-                page.slide(me.parentPage.element, 'right');
+                page.slideTo(me.parentPage.element, 'right');
             });
         }
     });
