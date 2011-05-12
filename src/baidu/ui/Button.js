@@ -4,9 +4,7 @@
  */
  
 ///import baidu.ui.createUI;
-///import baidu.event.on;
 ///import baidu.event.tap;
-///import baidu.fn.bind;
 
 /**
  * 按钮

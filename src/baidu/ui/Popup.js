@@ -16,6 +16,9 @@
  * @config  {DOMElement}  element
  * @config  {Boolean}     mask     是否启用遮罩层
  * @config  {Number}      zIndex  
+ * @config {Function}     [onok]      点击确定按钮时触发
+ * @config {Function}     [oncancel]  点击取消按钮时触发
+ * @config {Function}     [onclose]  点击关闭按钮时触发
  * @return  {Popup}                Popup类
  */
 baidu.ui.Popup = baidu.ui.createUI(function() {
@@ -62,6 +65,14 @@ baidu.ui.Popup = baidu.ui.createUI(function() {
         if (me.mask && !baidu.ui.Mask._instance) {
             me._addMask();
         }
+        
+        me.each('ok', function(item, i){
+            me.on(item.element, 'tap', '_onOk');
+        });
+        
+        me.each('cancel', function(item, i){
+            me.on(item.element, 'tap', '_onCancel');
+        });
 
         me.dispatchEvent('onload');
     },
@@ -131,11 +142,12 @@ baidu.ui.Popup = baidu.ui.createUI(function() {
         });
 
     },
-
+    
     /**
      * 关闭弹出层
+     * @param {Function} fn 回调函数
      */
-    close: function() {
+    close: function(fn) {
         var me = this,
             element = me.element;
         
@@ -149,7 +161,30 @@ baidu.ui.Popup = baidu.ui.createUI(function() {
             'onfinish': function(){
                baidu.dom.hide(element);
                me.dispatchEvent('close');
+               fn();
             }
        });
+    },
+    
+    /**
+     * 确认
+     * @private
+     */
+    _onOk: function(){
+        var me = this;
+        me.close(function(){
+            me.dispatchEvent('ok');
+        });
+    },
+    
+    /**
+     * 取消
+     * @private
+     */
+    _onCancel: function(){
+        var me = this;
+        me.close(function(){
+            me.dispatchEvent('cancel');
+        });
     }
 });

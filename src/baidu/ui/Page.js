@@ -32,7 +32,7 @@ baidu.ui.Page = baidu.ui.createUI( function(options) {
         baidu.ui.Base._init.call(me);
         
         me._updatePage();
-        me.dispatchEvent('init');
+        me.dispatchEvent('load');
     },
     
     /**
