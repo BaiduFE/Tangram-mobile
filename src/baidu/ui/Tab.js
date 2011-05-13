@@ -9,7 +9,6 @@
 ///import baidu.dom.setStyle;
 ///import baidu.dom.removeClass;
 ///import baidu.fx.slide;
-///import baidu.array.each;
 ///import baidu.event.tap;
 
 /**
@@ -108,7 +107,7 @@ baidu.ui.Tab = baidu.ui.createUI(function(options){
                 currentContent.style.display = 'none';
                 baidu.ui.Tab._moving = false;
                 me.currentIndex = index;
-                fn();
+                fn && fn();
             }
         });
 

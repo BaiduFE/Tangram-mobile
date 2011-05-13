@@ -220,6 +220,8 @@ baidu.ui.Scroller = baidu.ui.createUI( function(options) {
         } else {
             me._resetPosition();
         }
+        
+        me.dispatchEvent('scroll');
     },
     
     /**

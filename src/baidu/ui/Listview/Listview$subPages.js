@@ -3,7 +3,9 @@
  * Copyright 2011 Baidu Inc. All rights reserved.
  */
 
+///import baidu.ui.Page;
 ///import baidu.ui.Listview;
+///import baidu.ui.get;
 ///import baidu.ui.getParent;
 ///import baidu.event.tap;
 

@@ -4,6 +4,7 @@
  */
 
 ///import baidu.ui.Page;
+///import baidu.ui.get;
 ///import baidu.event.tap;
 
 baidu.ui.Page.register( function(me) {

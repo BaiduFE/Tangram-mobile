@@ -91,6 +91,11 @@ baidu.ui.Carousel = baidu.ui.createUI( function() {
     goToItem: function(index) {
         var me = this;        
         index = Math.min(Math.max(0, index), me.items.length - 1);
+        
+        if(index == me.activeitem){
+            return;
+        }
+        
         me._translate(me.content, -index * me.itemWidth);
         me.activeitem = index;
     },

@@ -74,9 +74,9 @@ baidu.ui.Button = baidu.ui.createUI( function(options) {
      */
     disable: function() {
         var me = this,
-        element = me.element;
+            element = me.element;
         
-        element.setAttrbute('disabled', 'disabled');
+        element.setAttribute('disabled', 'disabled');
         me.disabled = 'disabled';
         me.dispatchEvent('disable');
     }

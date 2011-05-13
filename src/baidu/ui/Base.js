@@ -114,7 +114,7 @@ baidu.ui.Base = {
             args = (xargs) ? xargs.concat([].slice.call(arguments, 0)) : arguments;
             return fn.apply(me, args);
         };
-        baidu.event.on(elem, type, handler, true);
+        baidu.event.on(elem, type, handler);
     },
     
     /**
