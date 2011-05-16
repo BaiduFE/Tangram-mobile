@@ -7,57 +7,92 @@
 
 baidu.event.fireCustomEvent = function(element, type, options) {
     options = options || {};
+    var fire = baidu.event.fire;
     switch(type) {
+    	case 'taphold': 
+    		fire(element, 'touchstart');
+    		break;
+    		
         case 'tap':
-            baidu.event.fire(element, 'touchstart');
-            baidu.event.fire(element, 'touchend');
+            fire(element, 'touchstart');
+            fire(element, 'touchend');
             break;
-            
+        
+        case 'dbtap':
+        	fire(element, 'touchstart');
+            fire(element, 'touchend');
+            fire(element, 'touchstart');
+            fire(element, 'touchend');
+            break;
+        
         case 'scroll':
         case 'drag':
             if(options.direction == 'left') {
-                baidu.event.fire(element, 'touchstart', {
+                fire(element, 'touchstart', {
                     clientX: 1
                 });
-                baidu.event.fire(element, 'touchmove');
-                baidu.event.fire(element, 'touchend');
+                fire(element, 'touchmove');
+                fire(element, 'touchend');
             } else if(options.direction == 'up') {
-                baidu.event.fire(element, 'touchstart');
-                baidu.event.fire(element, 'touchmove', {
+                fire(element, 'touchstart');
+                fire(element, 'touchmove', {
                     clientY: 1
                 });
-                baidu.event.fire(element, 'touchend');
+                fire(element, 'touchend');
             } else if(options.direction == 'down') {
-                baidu.event.fire(element, 'touchstart', {
+                fire(element, 'touchstart', {
                     clientY: 1
                 });
-                baidu.event.fire(element, 'touchmove');
-                baidu.event.fire(element, 'touchend');
+                fire(element, 'touchmove');
+                fire(element, 'touchend');
             } else {
-                baidu.event.fire(element, 'touchstart');
-                baidu.event.fire(element, 'touchmove', {
+                fire(element, 'touchstart');
+                fire(element, 'touchmove', {
                     clientX: 1
                 });
-                baidu.event.fire(element, 'touchend');
+                fire(element, 'touchend');
             }
             break;
 
         case 'swipe':
             if(options.direction == 'right') {
-                baidu.event.fire(element, 'touchstart');
-                baidu.event.fire(element, 'touchmove', {
+                fire(element, 'touchstart');
+                fire(element, 'touchmove', {
                     clientX: 40
                 });
-                baidu.event.fire(element, 'touchend');
+                fire(element, 'touchend');
 
             } else {
-                baidu.event.fire(element, 'touchstart', {
+                fire(element, 'touchstart', {
                     clientX: 40
                 });
-                baidu.event.fire(element, 'touchmove');
-                baidu.event.fire(element, 'touchend');
+                fire(element, 'touchmove');
+                fire(element, 'touchend');
             }
             break;
-
+            
+         case 'turn':
+         	if(window.innerWidth > window.innerHeight) {
+                options.turned = true;
+                options.orientation = 'landscape';
+            } else {
+                options.turned = false;
+                options.orientation = 'portrait';
+            }
+            
+         	if("orientation" in window){
+         		fire(window, 'orientationchange', options);
+         	}else{
+         		fire(window, 'resize', options);
+         	}
+         	break;
+         	
+         case 'pinch':
+         	fire(element, 'gesturestart');
+         	fire(element, 'gesturechange');
+         	break;
+            
+         default :
+         	fire(element, type, options);
     }
 }

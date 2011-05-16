@@ -19,14 +19,12 @@ baidu.event.TAP_LAST_TIME = "_tgEvtTapLastTime";
  * @param {string}       dbtapThreshold   双击时间间隔
  */
 baidu.event._tap = function (elem, listener, type, dbtapThreshold) {
-    var 
-        startTime,
+    var startTime,
         isCancel,
         touch,
         CANCLE_TAP = baidu.event.CANCLE_TAP,
         TAP_LAST_TIME = baidu.event.TAP_LAST_TIME,
         isSupportTouch = baidu.browser.isSupportTouch,
-        
         handlers = {
             touchstart : function (e) {
                 touch = baidu.event.getTouchInfo(e);
@@ -65,6 +63,6 @@ baidu.event._tap = function (elem, listener, type, dbtapThreshold) {
                     }
                 }
             }
-        }
+        };
     return handlers;
 };

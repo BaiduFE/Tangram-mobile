@@ -4,7 +4,6 @@
  */
 ///import baidu.event.getCompat;
 ///import baidu.dom._g;
-///import baidu.browser.ie;
 ///import baidu.object.extend;
 ///import baidu.object.values;
 ///import baidu.lang.isNumber;
@@ -38,37 +37,34 @@
  * @returns {HTMLElement} 目标元素
  */
 (function(){
-    var browser = baidu.browser,
-    keys = {
-        keydown : 1,
-        keyup : 1,
+    var keys = {
         keypress : 1
     },
     mouses = {
         click : 1,
-        dblclick : 1,
         mousedown : 1,
         mousemove : 1,
         mouseup : 1,
-        mouseover : 1,
-        mouseout : 1,
         touchstart: 1,
         touchmove: 1,
-        touchend: 1
+        touchend: 1,
+        gesturestart: 1,
+        gestureend: 1,
+        gesturechange: 1
     },
     htmls = {
+    	load : 1,
+    	unload : 1,
+    	focus : 1,
+    	blur : 1,
+    	change : 1,
+    	submit : 1,
         abort : 1,
-        blur : 1,
-        change : 1,
         error : 1,
-        focus : 1,
-        load : browser.ie ? 0 : 1,
         reset : 1,
         resize : 1,
         scroll : 1,
-        select : 1,
-        submit : 1,
-        unload : browser.ie ? 0 : 1
+        select : 1
     },
     bubblesEvents = {
         scroll : 1,
@@ -87,8 +83,10 @@
         "UIEvents" : ["bubbles", "cancelable", "view", "detail"],
         "Events" : ["bubbles", "cancelable"]
     };
+    
     baidu.object.extend(bubblesEvents, keys);
     baidu.object.extend(bubblesEvents, mouses);
+    
     function parse(array, source){//按照array的项在source中找到值生成新的obj并把source中对应的array的项删除
         var i = 0, size = array.length, obj = {};
         for(; i < size; i++){
@@ -97,7 +95,8 @@
         }
         return obj;
     };
-    function eventsHelper(type, eventType, options){//非IE内核的事件辅助
+    
+    function eventsHelper(type, eventType, options){
         options = baidu.object.extend({}, options);
         var param = baidu.object.values(parse(parameters[eventType], options)),
             evnt = document.createEvent(eventType);
@@ -114,19 +113,11 @@
         baidu.object.extend(evnt, options);//把多出来的options再附加上去,这是为解决当创建一个其它event时，当用Events代替后需要把参数附加到对象上
         return evnt;
     };
-    function eventObject(options){//ie内核的构建方式
-        var evnt;
-        if(document.createEventObject){
-            evnt = document.createEventObject();
-            baidu.object.extend(evnt, options);
-        }
-        return evnt;
-    };
+    
     function keyEvents(type, options){//keyEvents
         options = parse(parameters["KeyEvents"], options);
         var evnt;
-        if(document.createEvent){
-            try{//opera对keyEvents的支持极差
+        try{
                 evnt = eventsHelper(type, "KeyEvents", options);
             }catch(keyError){
                 try{
@@ -135,23 +126,12 @@
                     evnt = eventsHelper(type, "UIEvents", options);
                 }
             }
-        }else{
-            options.keyCode = options.charCode > 0 ? options.charCode : options.keyCode;
-            evnt = eventObject(options);
-        }
         return evnt;
     };
 
     function mouseEvents(type, options) {//mouseEvents
         options = parse(parameters["MouseEvents"], options);
         var evnt = eventsHelper(type, "MouseEvents", options);
-        if(options.relatedTarget && !evnt.relatedTarget) {
-            if("mouseout" == type.toLowerCase()) {
-                evnt.toElement = options.relatedTarget;
-            } else if("mouseover" == type.toLowerCase()) {
-                evnt.fromElement = options.relatedTarget;
-            }
-        }
         if (!('pageX' in evnt))
             evnt.pageX = evnt.clientX;
         if (!('pageY' in evnt))
