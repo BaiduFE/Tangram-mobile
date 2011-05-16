@@ -1,4 +1,4 @@
-module("baidu.mobile.dom.query")
+module("baidu.dom.query")
 
 test('1 param',function(){
 	expect(11);
@@ -18,21 +18,21 @@ test('1 param',function(){
 	div.className = 'class';
 	div2.className = 'class';
 	a2.className = 'class';
-	var result = baidu.mobile.dom.query('a');
+	var result = baidu.dom.query('a');
 	equal(result.length,2,'2 results of a');
 	equal(result[0],a2,'result 1 a');
 	equal(result[1],a,'result 2 a2');
-	result = baidu.mobile.dom.query('#comId');//id
+	result = baidu.dom.query('#comId');//id
 	equal(result.length,1,'1 results of id comId');
 	equal(result[0],div,'id comId div');
 	
-	result = baidu.mobile.dom.query('.class');//className
+	result = baidu.dom.query('.class');//className
 	equal(result.length,3,'length 3');
 	equal(result[0],div,'class div');
 	equal(result[1],a2,'class a2');
 	equal(result[2],div2,'class div2');
 	
-	result = baidu.mobile.dom.query('input:disabled');
+	result = baidu.dom.query('input:disabled');
 	equal(result.length,1,'1 result of input');
 	equal(result[0],input,'input disabled');
 	document.body.removeChild(div);
@@ -48,7 +48,7 @@ test('2 params',function(){
 	document.body.appendChild(a);
 	div.appendChild(a2);
 	div.appendChild(div2);
-	var result = baidu.mobile.dom.query('a',div);
+	var result = baidu.dom.query('a',div);
 	equal(result.length,1,'2 results of a');
 	equal(result[0],a2,'result 1 a');
 //	equal(result[1],a,'result 2 a2');
