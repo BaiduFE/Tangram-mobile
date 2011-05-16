@@ -3,7 +3,7 @@
  * Copyright 2011 Baidu Inc. All rights reserved.
  */
 
-///import baidu.ui;
+///import baidu.ui.getAttribute;
 ///import baidu.dom.query;
 ///import baidu.dom.g;
 ///import baidu.object.extend;

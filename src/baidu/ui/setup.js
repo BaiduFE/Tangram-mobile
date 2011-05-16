@@ -3,6 +3,7 @@
  * Copyright 2011 Baidu Inc. All rights reserved.
  */
 
+///import baidu.ui;
 ///import baidu.dom.query;
 ///import baidu.page.hideBar;
 
