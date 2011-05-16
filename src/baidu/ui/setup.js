@@ -11,11 +11,11 @@
  *
  * @param {Function} [fn] setup成功回调函数
  * @param {object} [options] 配置
- * @param {HTMLElement} element setup容器元素
+ * @param {HTMLElement} target setup容器元素
  */
-baidu.ui.setup = function(fn, element) {
-    function createAll() {
-        var elements = baidu.dom.query('[t-ui]', element),
+baidu.ui.setup = function(fn, target) {
+    baidu.page.hideBar(function(){
+    	var elements = baidu.dom.query('[t-ui]', target),
             length = elements.length,
             i,
             type,
@@ -55,7 +55,5 @@ baidu.ui.setup = function(fn, element) {
         if(fn) {
             fn();
         }
-    }
-
-    baidu.page.hideBar(createAll);
+    });
 };
