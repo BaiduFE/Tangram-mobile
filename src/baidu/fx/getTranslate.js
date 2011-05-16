@@ -16,8 +16,8 @@
  */
 baidu.fx.getTranslate = function(x, y) {
     var translateOpen = 'translate' + (baidu.browser.has3d ? '3d(' : '('),
-        translateClose = baidu.browser.has3d ? ',0)' : ')';
+        translateClose = baidu.browser.has3d ? ', 0px)' : ')';
     x = baidu.lang.isNumber(x) ? x + "px" : x;
     y = baidu.lang.isNumber(y) ? y + "px" : y;
-    return [translateOpen, x, ",", y, translateClose].join("");
+    return [translateOpen, x, ", ", y, translateClose].join("");
 };

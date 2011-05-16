@@ -25,8 +25,8 @@ baidu.fx.scale = function(elem, to, from, options) {
             y = y || x;
             z = z || 1;
             return baidu.browser.has3d ? 
-                scaleOpen + x + "," + y + "," + z + scaleClose :
-                scaleOpen + x + "," + y + scaleClose;
+                scaleOpen + x + ", " + y + ", " + z + scaleClose :
+                scaleOpen + x + ", " + y + scaleClose;
         }
         
     options = baidu.object.extend(options || {}, {
