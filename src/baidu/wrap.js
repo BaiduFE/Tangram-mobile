@@ -2,17 +2,16 @@
  * Tangram Mobile
  * Copyright 2011 Baidu Inc. All right reserved.
  *
- * path: baidu/wrap.js
- * author: berg,walter
- * version: 1.0.0
- * date: 2011-03-10
  */
 ///import baidu.fn.methodize;
 ///import baidu.fn.multize;
 ///import baidu.fn.wrapReturnValue;
 ///import baidu.array.each;
 ///import baidu.dom.query;
+///import baidu.dom.ready;
 ///import baidu.lang.toArray;
+///import baidu.lang.isString;
+///import baidu.lang.isFunction;
 
 (function(){
 
@@ -37,7 +36,8 @@
                    "empty hide show insertAfter insertBefore insertHTML toggle getParent q children " + 
                    "next first last prev getAncestorByClass getAncestorBy getAncestorByTag",
             "event": "on un once tap dbtap pinch swipe taphold turn fire customScroll",
-            "fx": "cube fade flip pop rotate scale slide start stop translate"
+            "fx": "cube fade flip pop rotate scale slide start stop translate",
+            "ui": "button"
         },
         
         //不包装返回值
@@ -71,11 +71,13 @@
     
     m.fn = m.prototype = {
         init: function(selector, context){
-            var gNode = baidu._g(selector);
-            if(!gNode) {
-                gNode = baidu.dom.query(selector);
+            if(baidu.lang.isString(selector)) {
+                this._dom = baidu.dom.query(selector);
+            } else if(baidu.lang.isFunction(selector)) {
+                baidu.dom.ready(selector);
+            } else {
+                this._dom = baidu.lang.toArray(selector);
             }
-            this._dom = baidu.lang.toArray(gNode);
         },
         
         each: function(iterator){

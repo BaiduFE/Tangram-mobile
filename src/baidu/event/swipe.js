@@ -1,24 +1,18 @@
 /*
- * Tangram Mobile
- * Copyright 2010 Baidu Inc. All rights reserved.
- * 
- * path: baidu/event/swipe.js
- * author: bang
- * version: 1.0.0
- * date: 2010/12/6
- */
+* Tangram Mobile
+* Copyright 2010 Baidu Inc. All rights reserved.
+*
+*/
 
-///import baidu.event;
-///import baidu.event.on
+///import baidu.event.getTouchInfo;
 ///import baidu.object.each;
 
 //左右滑动n像素触发swipe事件
-baidu.event.swipeTiggerThreshold = 70;
+baidu.event.swipeTiggerThreshold = 35;
 //上下滑动超过n像素不触发swipe事件
-baidu.event.swipeCancelThreshold = 50;
+baidu.event.swipeCancelThreshold = 70;
 
-
- /**
+/**
  * 触摸滑动事件
  * 对事件对象e扩展三个属性：
  *  direction: {string} left|right  滑动方向
@@ -30,39 +24,41 @@ baidu.event.swipeCancelThreshold = 50;
  * @return {Object}   handlers   事件侦听hash对象
  */
 baidu.event.swipe = function (elem, listener) {
-    var 
-        tiggerThreshold = baidu.event.swipeTiggerThreshold,
+    var tiggerThreshold = baidu.event.swipeTiggerThreshold,
         cancelThreshold = baidu.event.swipeCancelThreshold,
-        startX, startY, startPageY,
+        startX, startY,
+        deltaX,
+        distanceX, distanceY,
         startTime,
-        lock,
+        deltaTime,
+        touch,
         handlers = {
             touchstart : function (e) {
-                //两个以上手指接触时不触发swipe事件
-                lock = (e.touches && e.touches.length > 1);
-                var touch = e.targetTouches ? e.targetTouches[0] : e;
+                touch = baidu.event.getTouchInfo(e);
                 startX = touch.pageX;
                 startY = touch.pageY;
-                startPageY = window.pageYOffset;
                 startTime = e.timeStamp;
             },
+            touchmove: function(e) {
+                touch = baidu.event.getTouchInfo(e);
+                deltaX = touch.pageX - startX;
+                distanceX = Math.abs(deltaX);
+                distanceY = Math.abs(touch.pageY - startY);
+                deltaTime = e.timeStamp - startTime;
+    
+                if(distanceX >= 10) {
+                    e.preventDefault();
+                }
+            },
             touchend : function (e) {
-                if (lock) return;
-                var touch = e.changedTouches ? e.changedTouches[0] : e,
-                    isHori = Math.abs(touch.pageX - startX) >= tiggerThreshold 
-                             && Math.abs(touch.pageY - startY) <= cancelThreshold
-                             && Math.abs(window.pageYOffset - startPageY) <= cancelThreshold,
-                    isVert = Math.abs(touch.pageY - startY) >= tiggerThreshold
-                             && Math.abs(touch.pageX - startX) <= cancelThreshold;
-                
-                if (isHori || isVert) {
-                    var delta = isHori ? touch.pageX - startX : touch.pageY - startY;
-                    e["direction"] = isHori ? ((delta < 0) ? 'left' : 'right') : ((delta < 0) ? 'up' : 'down');
-                    e["distance"] = Math.abs(delta);
-                    e["delta"] = delta;
-                    listener.call(elem, e);
+                if(distanceX >= tiggerThreshold && distanceY <= cancelThreshold) {
+                    touch["direction"] = (deltaX < 0) ? 'left' : 'right';
+                    touch["distance"] = distanceX;
+                    touch["delta"] = deltaX;
+                    listener.call(elem, touch, e);
                 }
             }
         }
+        
     return handlers;
 };

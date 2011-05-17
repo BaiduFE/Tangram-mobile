@@ -2,10 +2,6 @@
  * Tangram Mobile
  * Copyright 2010 Baidu Inc. All rights reserved.
  * 
- * path: baidu/event/on.js
- * author: bang
- * version: 1.0.0
- * date: 2010/12/6
  */
 
 ///import baidu.event;
@@ -20,27 +16,28 @@
  * @param {HTMLElement|string|window} element  目标元素或目标元素id
  * @param {string}                    type     事件类型
  * @param {function}                listener 事件监听器
- * @param {boolean}                compat 桌面浏览器的兼容
  * @return {HTMLElement} 目标元素
  */
-baidu.event.on = function(elem, type, listener, compat) {
+baidu.event.on = function(elem, type, listener) {
     elem = baidu.dom._g(elem);
    
     var customEvent = baidu.event,
-        handlers;
+        handlers,
+        _bind = function(elem, evtName, evtFunc){
+            var _event = customEvent.getCompat(elem, evtName);
+            _event.element.addEventListener(_event.name, evtFunc, false);
+        };
+        
     if (customEvent && customEvent[type]) {
         handlers = customEvent[type](elem, listener);
         baidu.object.each(handlers, function(evtFunc, evtName) {
-            evtName = compat ? baidu.event.getCompat(evtName) : evtName;
-            elem.addEventListener(evtName, evtFunc, false);
+            _bind(elem, evtName, evtFunc);
         });
-        
     } else {
-		var type = compat ?  baidu.event.getCompat(type) : type;
-        elem.addEventListener(type, listener, false);
+		_bind(elem, type, listener);
     }
     
-    baidu.event._listeners.push([elem, type, listener, handlers]);
+    customEvent._listeners.push([elem, type, listener, handlers]);
     return elem;
 };
 

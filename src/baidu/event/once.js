@@ -2,10 +2,6 @@
  * Tangram Mobile
  * Copyright 2010 Baidu Inc. All rights reserved.
  * 
- * path: baidu/event/once.js
- * author: bang
- * version: 1.0.0
- * date: 2010/12/6
  */
 
 ///import baidu.event.on;
@@ -18,15 +14,16 @@
  * @param {HTMLElement|string|window} element  目标元素或目标元素id
  * @param {string}      type         事件类型
  * @param {Function}    listener     事件监听器
+ * @param {boolean}                compat 桌面浏览器的兼容
  * @return {HTMLElement} 目标元素
  */
-baidu.event.once = function(elem, type, listener) {
+baidu.event.once = function(elem, type, listener, compat) {
     elem = baidu.dom.g(elem);
     function onceListener(event){
         listener.call(elem,event);  
         baidu.event.un(elem, type, onceListener);
     } 
-    baidu.event.on(elem, type, onceListener);
+    baidu.event.on(elem, type, onceListener, compat);
     return elem;
 };
 

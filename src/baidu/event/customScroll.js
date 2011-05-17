@@ -2,14 +2,10 @@
  * Tangram Mobile
  * Copyright 2010 Baidu Inc. All rights reserved.
  * 
- * path: baidu/event/customScroll.js
- * author: bang
- * version: 1.0.0
- * date: 2010/12/29
  */
 
 ///import baidu.event;
-///import baidu.event.on;
+///import baidu.browser.isSupportTouch;
 
  /**
  * 屏幕滚动事件
@@ -36,7 +32,7 @@ baidu.event.customScroll = function (elem, listener) {
         },
         
         handlers = {
-            touchmove : func,
+            touchmove : baidu.browser.isSupportTouch ? func : null,
             scroll : func
         }
     return handlers;

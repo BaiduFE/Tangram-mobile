@@ -2,10 +2,6 @@
  * Tangram Mobile
  * Copyright 2010 Baidu Inc. All rights reserved.
  * 
- * path: baidu/fx/scale.js
- * author: bang
- * version: 1.0.0
- * date: 2010/12/6
  */
 
 ///import baidu.browser.has3d;
@@ -29,8 +25,8 @@ baidu.fx.scale = function(elem, to, from, options) {
             y = y || x;
             z = z || 1;
             return baidu.browser.has3d ? 
-                scaleOpen + x + "," + y + "," + z + scaleClose :
-                scaleOpen + x + "," + y + scaleClose;
+                scaleOpen + x + ", " + y + ", " + z + scaleClose :
+                scaleOpen + x + ", " + y + scaleClose;
         }
         
     options = baidu.object.extend(options || {}, {

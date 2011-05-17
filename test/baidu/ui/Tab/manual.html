@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1.0, maximum-scale=1.0, user-scalable=no;"/>
+<title>无标题文档</title>
+<script src="../../../../src/import.php?f=baidu.ui.set,baidu.ui.setup,baidu.ui.Tab" type="text/javascript"></script>
+<style>
+input:focus, select:focus, textarea:focus {outline: 0px solid #ffffff;}/* 去掉safer输入的边框*/
+
+input,textarea{
+    -webkit-user-select: text;
+}
+
+*{
+    -webkit-user-select: none;/* 去掉拷贝*/
+}
+
+body {
+    padding:0;
+    margin:0;
+}
+
+.content {
+    width:100%;
+    height:300px;
+    background-color:silver;
+}
+</style>
+</head>
+<body>
+    <div id='tab' t-ui='tab'>
+        <div t-role='head'>
+             <button class="button" >tab1</button>
+             <button class="button" >tab2</button>
+             <button class="button" >tab3</button>
+             <button class="button" >tab4</button>
+        </div>  
+        
+        <div t-role='content'>
+            <div class='content'>111111111</div>
+            <div class='content' style='display:none;'>222222222</div>
+            <div class='content' style='display:none;'>333333333</div>
+            <div class='content' style='display:none;'>444444444</div>
+        </div>
+    </div>
+</body>
+<script>
+    baidu.ui.setup(function(){
+        baidu.ui.set('tab', {
+            onswitch: function(){
+                console.log('switched');
+            }
+        });
+    });
+</script>
+</html>
+
