@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="project" default="release" basedir="../">
+	<path id="ext.classpath">
+		<fileset dir="test/tools/lib">
+			<include name="**/*.jar" />
+		</fileset>
+	</path>
+	<taskdef name='taskImport' classname="com.baidu.tangram.TaskImport" classpathref="ext.classpath">
+	</taskdef>
+	<target name="importSrc">
+		<!-- delete release file -->
+		<delete file="release/mobile_release.js" />
+		<delete file="release/all_release_src.js" />
+	</target>
+
+	<target name="release" depends="importSrc">
+		<taskImport />
+		
+		<!--YUI -->
+		<exec executable="java">
+			<arg value="-jar" />
+			<arg value="test/tools/lib/yuicompressor-2.4.2.jar" />
+			<arg value="--charset" />
+			<arg value="utf-8" />
+			<arg value="-v" />
+			<arg value="-o" />
+			<arg value="release/mobile_release.js" />
+			<arg value="release/all_release_src.js" />
+		</exec>
+	</target>
+
+
+</project>

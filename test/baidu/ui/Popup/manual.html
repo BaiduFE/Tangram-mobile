@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1.0, maximum-scale=1.0, user-scalable=no;"/>
+<title>无标题文档</title>
+<script src="../../../../src/import.php?f=baidu.dom.g,baidu.ui.get,baidu.ui.setup,baidu.ui.Popup,baidu.ui.Button,baidu.ui.Mask" type="text/javascript"></script>
+  <style>
+      body{
+          margin:0;
+          padding:0;
+      }
+      .tangram-popup{
+          width:200px;
+          height:100px;
+          background-color:white;
+          
+      }
+  </style>
+</head>
+<body>
+    <div id="showpop" class="button" t-ui='button'>showpop</div>
+    <div t-ui="Popup" t-attr="mask:true" id="popup" style="display:none;">
+        this is a popup test by tangram.
+        <div t-role="ok" id="b1" class="button">ok</div>
+        <div t-role="cancel" id="b1" class="button">cancel</div>
+    </div>
+    <!--<div t-ui="Mask" id="masktest"></div>-->
+</body>
+<script>
+    baidu.ui.setup(function(){
+        var popup = baidu.ui.get(baidu.g("popup")); 
+        var button = baidu.ui.get(baidu.g("showpop")); 
+        
+        popup.oncancel = function(){
+            console.log("popop canceled");
+        }
+        popup.onok = function(){
+            console.log("popop ok");
+        }
+        popup.onopen = function(){
+            console.log("popop open");
+        }
+        
+        button.ontap = function(){
+            popup.open();
+        };
+    });
+</script>
+</html>
